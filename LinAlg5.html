@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="LinAlg.css">
+<style>.equation { color: rgb(0, 51, 153); }</style>
+<style>
+ul {
+    list-style-position: outside;
+    list-style-image: url('bluedot.gif');
+}
+ul.inner {
+    list-style-position: outside;
+    list-style-image: none;
+    list-style-type: disc;
+}
+ul.inner2 {
+    list-style-position: outside;
+    list-style-image: none;
+    list-style-type: circle;
+}
+</style>
+<title>LA5 for DE</title>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage"});</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>
+</head>
+<body>
+
+<br>
+<h1>Vector Spaces</h1>
+<br>
+
+<div class="sectionhead">1. Definition</div>
+
+<p class="tabbed">First, we must give the definition of a vector space, 
+although we will not use this definition very often in what follows.
+</p>
+
+<div class="greenbox">
+A <b>Vector Space</b> is a set $V$ together with a rule for adding two 
+elements (or vectors) $x, y \in V$ and a rule for scaling any 
+element (or vector) $x \in V$ by a real number $\alpha \in \mathbb{R},$ 
+such that the following axioms hold for all $x, y, z \in V$ and every 
+$\alpha, \beta \in \mathbb{R}:$
+<ul class="greenul">
+<li> 
+<span class="lispan">
+  $x + y = y + x$</span>
+  (addition is commutative)
+</li>
+<li> 
+<span class="lispan">
+  $x + ( y + z ) = ( x + y ) + z$</span>
+  (addition is associative)
+</li>
+<li>
+<span class="lispan">
+There is a unique element in $V$ called zero, often denoted 
+$\vec{0},$ such that $x + \vec{0} = x$ for all $x \in V$</span>
+</li>
+<li>
+<span class="lispan">
+Each element $x \in V$ has a unique additive inverse $-x \in V$ such 
+that $x + (-x) = \vec{0}$</span>
+</li>
+<li>
+<span class="lispan">
+$1 \cdot x = x$ for all $x \in V$</span>
+</li>
+<li> 
+<span class="lispan">
+  $(\alpha \beta) x = \alpha (\beta x)$</span>
+  (scaling is associative)
+</li>
+<li> 
+<span class="lispan">
+  $\alpha (x + y) = \alpha x + \alpha y$</span>
+  (distribution of scalars)
+</li>
+<li> 
+<span class="lispan">
+  $(\alpha + \beta) x = \alpha x + \beta x$</span>
+  (distribution of vectors)
+</li>
+</ul>
+</div>
+
+<br>
+
+<div class="sectionhead" style="top: 0px;">2. Examples</div>
+
+<p class="tabbed">The best way to understand the notion of a vector 
+space is to see some examples:</p>
+<ul class="blueul">
+<li>
+<b>$n$-space:</b> $\mathbb{R}^n$ for $n = 1, 2, \dots$
+</li>
+<li>
+<b>Matrices:</b>
+<br>
+<p><table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm;
+  padding-top: 0.5cm;  padding-bottom: 0.5cm; color: darkblue;
+ background: rgb(224,240,255);">
+$$ M_{r \, \times \, c}(\mathbb{R}) = \left\{ \quad \left[ \begin{array}{cccc} a_{1,1} & a_{1,2} & \cdots & a_{1,c} \\ a_{2,1} & a_{2,2} & \cdots & a_{2,c} \\ \vdots & \vdots & \ddots & \vdots \\ a_{r,1} & a_{r,2} & \cdots & a_{r,c} \\ \end{array} \right] 
+\quad \middle\vert \quad
+\begin{array}{c} a_{\,i,\,j} \in \mathbb{R} \\
+\textrm{for } i = 1, 2, \dots , r \\
+\textrm{and } j = 1, 2, \dots , c \\
+\end{array} 
+\quad \right\}
+$$
+</td>
+</tr>
+</tbody>
+</table></p>
+The notation above describes matrices with $r$ rows and $c$ columns. If a matrix has the same number of rows and columns, it is referred to as a square matrix. Square matrices use slightly different notation - instead of $M_{n \times n}(\mathbb{R})$ we will simply write $M_n(\mathbb{R})$.
+</li>
+<li>
+<b>Polynomials:</b>
+<br>
+<p><table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm;
+  padding-top: 0.5cm;  padding-bottom: 0.5cm; color: darkblue;
+ background: rgb(224,240,255);">
+$$ \mathcal{P}_n = \left\{ a_0 + a_1 t + a_2 t^2 + \cdots + a_n t^n \, \middle\vert \, \, a_0, a_1, \dots, a_n \in \mathbb{R} \right\}
+$$
+</td>
+</tr>
+</tbody>
+</table></p>
+For each $n$, we have $\mathcal{P}_n$, polynomials with real coefficients of degree less than or equal to $n$. (Note: the set of polynomials with degree exactly $n$ is <em>not</em> a vector space.) These vector spaces are nested, for example $\mathcal{P}_1 \subseteq \mathcal{P}_2$, and all of them lie in the much larger vector space of all polynomials,
+<p><table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm;
+  padding-top: 0.5cm;  padding-bottom: 0.5cm; color: darkblue;
+ background: rgb(224,240,255);">
+$$ \mathcal{P} =  \left\{ a_0 + a_1 t + a_2 t^2 + \cdots + a_n t^n \, \middle\vert \, \, n = 0, 1, 2, \dots \textrm{ and } a_0, a_1, \dots, a_n \in \mathbb{R} \right\} 
+$$
+</td>
+</tr>
+</tbody>
+</table></p>
+so that we have
+<p>
+ <table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkgreen" cellspacing="0" cellpadding="0"
+  ">
+<tbody>
+<tr>
+<td style="text-align: left;  padding-right: 0.5cm;
+  vertical-align: top; padding-left: 0.5cm; color: darkgreen;
+  padding-top: 0.3cm;  padding-bottom: 0.3cm;  background: rgb(245,255,250);">
+$$\mathcal{P}_0 \subseteq \mathcal{P}_1 \subseteq \mathcal{P}_2 \subseteq \cdots \subseteq \mathcal{P}_n \subseteq \cdots \subseteq \mathcal{P}$$
+</td>
+</tr>
+</tbody>
+</table></p>  
+</li>
+<li>
+<b>Complex Numbers:</b>
+<br>
+<p><table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm;
+  padding-top: 0.5cm;  padding-bottom: 0.5cm; color: darkblue;
+ background: rgb(224,240,255);">
+$$ \mathbb{C} = \left\{ \alpha + \beta i \, \middle\vert \, \, \alpha, \beta \in \mathbb{R} \right\}
+$$
+</td>
+</tr>
+</tbody>
+</table></p>
+This is a vector space under addition and scaling by real numbers. Notice that we have the notion of multiplication and division (and thus <em>multiplicative inverses</em>) in this set, but those things do not play into the definition of $\mathbb{C}$ as a vector space. Those extra rules give $\mathbb{C}$ more structure than other vector spaces (and those structures have names - $\mathbb{C}$ is also a commutative ring and a field), but when we ignore that extra structure we see that $\mathbb{C}$ is a vector space.
+</li>
+<li>
+<b>Real-Valued Functions:</b>
+<br>
+<p><table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm;
+  padding-top: 0.5cm;  padding-bottom: 0.5cm; color: darkblue;
+ background: rgb(224,240,255);">
+$$ C(\mathbb{R}) = \left\{ \, f : \mathbb{R} \to \mathbb{R} \, \middle\vert \, \, f \textrm{ is continuous on } \mathbb{R} \right\}
+$$
+</td>
+</tr>
+</tbody>
+</table></p>
+Again, we can multiply functions (making $C(\mathbb{R})$ an object called a commutative ring), but if we ignore that then we can see that $C(\mathbb{R})$ is a vector space. Often, $C(\mathbb{R})$ is denoted $C^{\, 0}(\mathbb{R})$, and in general
+<p><table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm;
+  padding-top: 0.5cm;  padding-bottom: 0.5cm; color: darkblue;
+ background: rgb(224,240,255);">
+$$ C^{\, k}(\mathbb{R}) =  \left\{ \, f : \mathbb{R} \to \mathbb{R} \, \middle\vert \, \, \frac{d^kf}{dx^k} = f^{(k)} \textrm{ is continuous on } \mathbb{R} \right\}
+$$
+</td>
+</tr>
+</tbody>
+</table></p>
+and
+<p><table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm;
+  padding-top: 0.5cm;  padding-bottom: 0.5cm; color: darkblue;
+ background: rgb(224,240,255);">
+$$ C^{\, \infty}(\mathbb{R}) =  \left\{ \, f : \mathbb{R} \to \mathbb{R} \, \middle\vert \, \, f \textrm{ is infinitely differentiable } \right\}
+$$
+</td>
+</tr>
+</tbody>
+</table></p>
+These vector spaces are nested again - if $f$ has a continuous second derivative, then $f$ has a continuous first derivative. We get
+<p>
+ <table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkgreen" cellspacing="0" cellpadding="0"
+  ">
+<tbody>
+<tr>
+<td style="text-align: left;  padding-right: 0.5cm;
+  vertical-align: top; padding-left: 0.5cm; color: darkgreen;
+  padding-top: 0.3cm;  padding-bottom: 0.3cm;  background: rgb(245,255,250);">
+$$C^{\, \infty}(\mathbb{R}) \subseteq \cdots \subseteq C^{\, k}(\mathbb{R}) \subseteq \cdots \subseteq C^{\, 2}(\mathbb{R}) \subseteq C^{\, 1}(\mathbb{R}) \subseteq C^{\, 0}(\mathbb{R}) = C(\mathbb{R})$$
+</td>
+</tr>
+</tbody>
+</table></p>
+In fact, since polynomials, $\mathcal{P}$, are infinitely differentiable functions on $\mathbb{R}$, we have
+<p>
+ <table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkgreen" cellspacing="0" cellpadding="0"
+  ">
+<tbody>
+<tr>
+<td style="text-align: left;  padding-right: 0.5cm;
+  vertical-align: top; padding-left: 0.5cm; color: darkgreen;
+  padding-top: 0.3cm;  padding-bottom: 0.3cm;  background: rgb(245,255,250);">
+$$\mathcal{P}_0 \subseteq \mathcal{P}_1 \subseteq \mathcal{P}_2 \subseteq \cdots \subseteq \mathcal{P}_n \subseteq \cdots \subseteq \mathcal{P} \subseteq C^{\, \infty}(\mathbb{R}) \subseteq \cdots $$
+$$\cdots \subseteq C^{\, k}(\mathbb{R}) \subseteq \cdots \subseteq C^{\, 2}(\mathbb{R}) \subseteq C^{\, 1}(\mathbb{R}) \subseteq C^{\, 0}(\mathbb{R}) = C(\mathbb{R})$$
+</td>
+</tr>
+</tbody>
+</table></p>
+</li>
+<li>
+<b>Solutions to homogeneous O.D.E.'s:</b>
+<br>
+Let
+$$L[y] = a_n(t) \, y^{(n)} + a_{n-1}(t) \, y^{(n-1)} + \cdots + a_2(t) \, y^{\, \prime \prime} + a_1(t) \, y^{\, \prime} + a_0(t) \, y = 0$$
+be an $n$th order, linear, homogeneous differential equation. The solutions form a vector space:
+<p><table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm;
+  padding-top: 0.5cm;  padding-bottom: 0.5cm; color: darkblue;
+ background: rgb(224,240,255);">
+$$ V_L = \left\{ \, y \in C(\mathbb{R}) \, \middle\vert \, \, L[y] = 0 \right\}$$
+</td>
+</tr>
+</tbody>
+</table></p>
+Note that $V_L$ is always a subset of $C(\mathbb{R})$, although it may lie in a smaller subset. For example, when $L$ is order $n$, $V_L \subseteq C^{\, n-1}(\mathbb{R})$.
+When $L$ has constant coefficients (i.e. when $a_n(t), \dots , a_0(t) \in \mathbb{R}$), then $V_L \subseteq C^{\, \infty}(\mathbb{R})$. Can you think of an example, $L$, for which $V_L \subseteq \mathcal{P}$?
+</li>
+<li>
+<b>Vector-Valued Functions:</b>
+<br>
+A vector valued function is a function $F: \mathbb{R} \to \mathbb{R}^n$. It can be expressed as a tuple of functions:
+$$F(t)=\left[ \begin{array}{c} \, \, f_1(t) \, \, \\ f_2(t) \\ \vdots \\ f_n(t) \end{array} \right]$$
+where each $f_i$ is a real-valued function. The function may also be written as $F(t) = \left[ \, \, f_1(t)\, , \, f_2(t)\, , \dots, \, f_n(t) \, \right]$. The graph of a vector-valued function is a curve in $\mathbb{R}^n$. For example, $F(t) = \left[ \, \cos(t)\, , \, \sin(t) \, \right]$ has graph the unit circle in the plane and $G(t) = \left[ \, t \cos(t)\, , \, t \sin(t) \, \right]$ has a spiral in the plane as its graph. Notice that this graph is not like the graph of a function $y = f(t)$ since we can not see the $t$-axis. One can visualize this axis by watching the curve being graphed over time, $t$. Click play in the left-hand column of the following link to see the curve being graphed over time:
+<br><br>
+<center>
+<a href="
+https://www.desmos.com/calculator/zd3nem7fhu
+" target="_blank">
+https://www.desmos.com/calculator/zd3nem7fhu
+</a>
+</center>
+<br>
+Another example is the spiral in $3$-space, $F(t) = \left[ \, \cos(t)\, , \, \sin(t) \, , \, t \, \right]$, shown here in the Sage cell:
+<br><br>
+<div class="sage"><script type="text/x-sage">
+t = var('t')
+parametric_plot3d((sin(t), cos(t), t), (t,0,20))
+</script></div>
+<br>
+Just like real-valued functions, we can add and scale vector-valued functions by adding and scaling their images pointwise in the codomain, $\mathbb{R}^n$. Thus we have new vector spaces
+<p><table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm;
+  padding-top: 0.5cm;  padding-bottom: 0.5cm; color: darkblue;
+ background: rgb(224,240,255);">
+<ul>
+<li>
+$$ C^0(\mathbb{R},\mathbb{R}^n) = C(\mathbb{R},\mathbb{R}^n) =  \left\{ \, \, \left[ \begin{array}{c} \, \, f_1 \, \, \\ f_2 \\ \vdots \\ f_n \end{array} \right] : \mathbb{R} \to \mathbb{R}^n \, \middle\vert \, \, \begin{array}{c}
+f_i \textrm{ is continuous on } \mathbb{R} \\
+\textrm{ for } i = 1, 2, \dots , n \\ \end{array}
+\right\}
+$$
+</li>
+<li>
+$$ C^{\, k}(\mathbb{R},\mathbb{R}^n) =  \left\{ \, \, \left[ \begin{array}{c} \, \, f_1 \, \, \\ f_2 \\ \vdots \\ f_n \end{array} \right] : \mathbb{R} \to \mathbb{R}^n \, \middle\vert \, \, \begin{array}{c}
+\frac{d^kf_i}{dx^k} = f_i^{(k)} \textrm{ is continuous on } \mathbb{R} \\
+\textrm{ for } i = 1, 2, \dots , n \\ \end{array}
+\right\}
+$$
+</li>
+<li>
+$$ C^{\, \infty}(\mathbb{R},\mathbb{R}^n) =  \left\{ \, \, \left[ \begin{array}{c} \, \, f_1 \, \, \\ f_2 \\ \vdots \\ f_n \end{array} \right] : \mathbb{R} \to \mathbb{R}^n \, \middle\vert \, \, \begin{array}{c}
+f_i \textrm{ is infinitely differentiable } \\
+\textrm{ for } i = 1, 2, \dots , n \\ \end{array}
+\right\}
+$$
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></p>
+Note: For solving linear systems of differential equations, we will focus solely on $C^{\, \infty}(\mathbb{R},\mathbb{R}^n)$, and following our text we will write these vector-valued functions as
+$$\vec{x}(t) = \left[ \begin{array}{c} \, \, x_1(t) \, \, \\ x_2(t) \\ \vdots \\ x_n(t) \end{array} \right].$$
+</li>
+<li>
+<b>Solutions to homogeneous, first order systems of O.D.E.'s:</b>
+<br>
+Given $A \in M_n(\mathbb{R})$, consider the homogeneous, first order system of differential equations given by
+$$\frac{d}{dt} \vec{x} = A \vec{x}.$$ A solution to this equation is a vector-valued function $\vec{x}(t) \in C^{\, \infty}(\mathbb{R},\mathbb{R}^n)$. The set of all solutions forms a vector space
+<p><table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm;
+  padding-top: 0.5cm;  padding-bottom: 0.5cm; color: darkblue;
+ background: rgb(224,240,255);">
+$$ V_A = \left\{ \, \vec{x} \in C^{\, \infty}(\mathbb{R},\mathbb{R}^n) \, \middle\vert \, \, \frac{d}{dt} \vec{x} = A \vec{x} \right\}$$
+</td>
+</tr>
+</tbody>
+</table></p>
+<b>Note:</b> Homogeneous O.D.E.'s $L$ have solution set $V_L \subseteq C(\mathbb{R})$ and linear systems given by a square matrix $A \in M_n(\mathbb{R})$ have solution set $V_A \subseteq C^{\, \infty}(\mathbb{R},\mathbb{R}^n)$.
+</li>
+<li>
+<b>A note on domain:</b>
+<br>
+Our definition of $C^{\, n}(\mathbb{R})$ has one flaw: it only allows for functions defined on the entire real number line. For example, $\ln (t)$, $\arcsin(t)$, $\sqrt{t}$, and $1\,/\,t$ are not members of this vector space. A simple generalization is to consider a subset $U \subseteq \mathbb{R}$ and define the vector spaces
+<p>
+ <table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkgreen" cellspacing="0" cellpadding="0"
+  ">
+<tbody>
+<tr>
+<td style="text-align: left;  padding-right: 0.5cm;
+  vertical-align: top; padding-left: 0.5cm; color: darkgreen;
+  padding-top: 0.3cm;  padding-bottom: 0.3cm;  background: rgb(245,255,250);">
+<ul class="greenul">
+<li>
+$ C(U) = \left\{ \, f : U \to \mathbb{R} \, \middle\vert \, \, f \textrm{ is continuous on } U \right\}
+$
+</li>
+<li>
+$$ C^{\, k}(U) =  \left\{ \, f : U \to \mathbb{R} \, \middle\vert \, \, \frac{d^kf}{dx^k} = f^{(k)} \textrm{ is continuous on } U \right\}
+$$
+</li>
+<li>
+$ C^{\, \infty}(U) =  \left\{ \, f : U \to \mathbb{R} \, \middle\vert \, \, f \textrm{ is infinitely differentiable } \right\}
+$
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></p>
+Then we can easily account for domains: 
+<ul class="inner">
+<li>$\ln(t) \in C((0,\infty))$</li>
+<li>$\arcsin(t) \in C([-1,1])$</li>
+<li>$\sqrt{t} \in C([0,\infty))$</li>
+<li>$1\,/\,t \in C((-\infty,0)\cup(0,\infty))$</li>
+</ul>
+This is especially important for differential equations. For example, the Euler Equation
+$$L[\,y\,] = 2\, t^2 \, y^{\, \prime \prime} + 3\, t \, y^{\, \prime} - y = 0$$ has fundamental solutions $y_1(t) = \sqrt{t}$ and $y_2(t) = 1\,/\,t$. Thus, in this case, $V_L = \left\{ c_1 \, \sqrt{t} + c_2 \, \left(\,1\,/\,t\,\right) \, \, \middle\vert \, \, c_1, c_2 \in \mathbb{R} \right\} \subseteq C\left((0,\infty)\right)$.
+</li>
+</ul>
+
+<br>
+
+<div class="sectionhead">3. 
+Geometric Intuition</div>
+
+Every vector space has some dimension. The line $\mathbb{R}^1$ is $1$ dimensional, the plane $\mathbb{R}^2$ is $2$ dimensional, and the $3$-space $\mathbb{R}^3$ is $3$ dimensional. We'll define dimension formally later, but for now I'm relying on your intuition based on these three examples. We can guess from these examples that the dimension of $\mathbb{R}^n$ is $n$.
+
+<br><br>
+
+How can we determine the dimensions of other vector spaces? Another way to describe dimension is to say that every vector space "acts like" $\mathbb{R}^n$ for some $n,$ and then $n$ is the dimension. The term for "acts like" is isomorphic and the symbol is $\cong$. For example,
+$$M_2(\mathbb{R}) = \left\{ \left[ \begin{array}{cc} a & b \\ c & d \end{array} \right] \, \Bigg\vert \, \, a, b, c, d \in \mathbb{R} \right\}$$
+has four coordinates and thus it "acts like" $\mathbb{R}^4$, we write $M_2(\mathbb{R}) \cong \mathbb{R}^4$, and we say $M_2(\mathbb{R})$ is $4$ dimensional. Here are some more examples:
+<ul class="inner">
+<li>
+$\mathbb{C} \cong \mathbb{R}^2$
+</li>
+<li>
+$M_{\, r \, \times \, c \, }(\mathbb{R}) \cong \mathbb{R}^{r \cdot c}$
+</li>
+<li>
+$M_n(\mathbb{R}) \cong \mathbb{R}^{n^2}$
+</li>
+<li>
+$\mathcal{P}_n \cong \mathbb{R}^{n+1}$
+</li>
+</ul>
+Some vector spaces are so big they are infinite dimensional. We will use the symbol $\mathbb{R}^{\infty}$ to denote these:
+<ul class="inner">
+<li>
+$\mathcal{P} \cong \mathbb{R}^{\infty}$
+</li>
+<li>
+$C^{\, \infty}(\mathbb{R}) \cong \mathbb{R}^{\infty}$
+</li>
+<li>
+$C^{\, k}(\mathbb{R}) \cong \mathbb{R}^{\infty}$
+</li>
+<li>
+$C^{\, \infty}(\mathbb{R},\mathbb{R}^n) \cong \mathbb{R}^{\infty}$
+</li>
+<li>
+$C^{\, k}(\mathbb{R},\mathbb{R}^n) \cong \mathbb{R}^{\infty}$
+</li>
+</ul>
+From our text we know that if $L$ is an $n$th order, homogeneous O.D.E. with constant coefficients, than its solution set $V_L \cong \mathbb{R}^n$ is $n$-dimensional. We also know that if $A \in M_n(\mathbb{R})$, then the solution set to the system $\displaystyle\frac{d}{dt}\vec{x} = A \vec{x}$, $V_A \cong \mathbb{R}^n$, is $n$-dimensional.
+<ul class="inner">
+<li>
+If $L$ is order $n$, then $V_L \cong \mathbb{R}^n$
+</li>
+<li>
+If $A \in M_n(\mathbb{R})$, then $V_A \cong \mathbb{R}^n$
+</li>
+</ul>
+
+<br><br><br><br><br>
+</body>
+</html>

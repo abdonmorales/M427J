@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>.equation { color: rgb(0, 51, 153); }</style>
+<style>.pequation { color: purple; }</style>
+<style>
+ul {
+    list-style-position: outside;
+    list-style-image: url('bluedot.gif');
+}
+</style>
+<title>LA0 for DE</title>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage"});</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script> 
+</head>
+<body style="font-family: Verdana, san serif; font-size: 95%; font-style: normal;
+	line-height: 180%; 
+	font-weight: 450; 
+	font-variant: normal;
+	color: #111">
+
+<br>
+<h1 style="text-align: center; color: rgb(0, 102 ,0); font-size:200%;
+font-weight:500;">RESOURCES and HOMEWORK</h1>
+<br>
+
+<ul>
+<li>
+How to follow the Resource/HW guide.
+</li>
+<li>
+How to use Beezer: $\mathbb{R}$ instead of $\mathbb{C}$, eg
+</li>
+<li>
+Info on Sage:
+</li>
+</ul>
+
+<p> &nbsp; &nbsp; <b> Use of technology:</b> These days hand
+calculators often have matrix capabilities, while various computer algebra
+systems such as SageMath, WolframAlpha, Mathematica and MATLAB are available to help 
+with tedious calculations. In this course, you will be expected to master
+all the basic concepts and techniques of linear algebra by first solving examples
+by hand in computationally simple cases. Once these concepts and techniques are
+understood, however, use of technology is then permitted at all times <b>except on 
+quizzes and exams</b>!
+</p>
+
+<p> &nbsp; &nbsp; <b> Practice with technology:</b> I strongly suggest using 
+the free open-source mathematics software system SageMath via the SageMathCell: </p>
+
+<div style="text-align: center"><img src="sage_logo.png" width="165" height="45"></div>
+
+<div class="sage"><script type="text/x-sage">
+A = matrix(QQ, [[3, -1, 2,  5],[9,  1, 2, -4]])
+B = matrix(QQ, [[1,  6, 1],[0, -1, 2],[5,  2, 3],[1,  1, 1]])
+show(A)
+show(B)
+show(A*B)
+</script></div>
+
+<br>
+
+If you would like to experiment with linear algebra computations via the SageMathCell
+yourself, please use the following links. The first links you to the official 
+SageMathCell web page, and the second is an incredibly useful quick reference for
+linear algebra functions.
+
+<p style="text-align: center;">Click for <a
+href="http://sagecell.sagemath.org/" target="_blank&quot;"><font
+color="Chocolate">SageMathCell</a></font></p>
+
+<p style="text-align: center;">Click for <a
+href="https://wiki.sagemath.org/quickref?action=AttachFile&do=view&target=quickref-linalg.pdf" target="_blank&quot;">
+<font color="Chocolate">Linear Algebra Quick Reference</a></font></p>
+
+<br>
+<br>
+</body>
+</html>

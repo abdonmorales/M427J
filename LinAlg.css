@@ -1,0 +1,133 @@
+body {
+  font-family: Verdana, san serif; 
+  font-size: 95%; 
+  font-style: normal;
+  line-height: 180%; 
+  font-weight: 450; 
+  font-variant: normal;
+  color: #111
+}
+
+div.sectionhead {
+  margin-left: -20px;
+  width: 100%;
+  padding: 5px 60px;
+  color: rgb(0, 51, 153);
+  border-top: 2px solid darkblue;
+  border-bottom: 2px solid darkblue;
+  background: rgb(224,240,255);
+  color: rgb(0, 102 ,0); 
+  font-size:100%;
+  font-weight:500;
+  position: sticky;
+  top: -1px;
+  z-index: 10;
+}
+
+div.bluebox {
+  margin: auto;
+  width: 725px;
+  padding: 15px 20px;
+  color: rgb(0, 51, 153);
+  border: 3px solid darkblue;
+  background: rgb(224,240,255);
+}
+
+div.greenbox {
+  margin: auto;
+  width: 725px;
+  padding: 15px 20px;
+  color: darkgreen;
+  border: 3px solid darkgreen;
+  background: rgb(245,255,250);
+}
+
+h1 {
+  text-align: center; 
+  color: rgb(0, 102 ,0); 
+  font-size:200%;
+  font-weight:500;
+}
+
+p.tabbed {
+  text-indent: 50px;
+}
+
+span.lispan {
+  display: inline-block; 
+  width: 350px; 
+  padding-left: 30px;
+  vertical-align: top;
+}
+
+table.rrefeg1 {
+  margin-left: auto; 
+  margin-right: auto;
+  text-align: center; 
+  border: 0px;
+}
+
+table.rrefeg1 td {
+  padding: 10px 30px;
+  vertical-align: center;
+}
+
+table.rrefeg2 {
+  margin-left: auto; 
+  margin-right: auto;
+  text-align: left; 
+  border: 0px;
+  width: 734px;
+  border-spacing: 10px;
+}
+
+table.rrefeg2 td {
+  padding: 10px 30px;
+  vertical-align: center;
+}
+
+table.twocol {
+  margin-left: auto; 
+  margin-right: auto;
+  text-align: left; 
+  border: 3px solid lightgray;
+  border-spacing: 2px;
+}
+
+table.twocol td {
+  width: 450px; 
+  text-align: left;
+  padding: 10px 15px;
+  vertical-align: top;
+  border: 1px solid lightgray;
+}
+
+ul.blueul {
+  list-style-image: url('bluedot.gif');
+}
+
+ul.blueul li {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+ul.greenul {
+  list-style-image: url('greenbullet.png');
+}
+
+ul.greenul li {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+ul.inner {
+    list-style-position: outside;
+    list-style-image: none;
+    list-style-type: disc;
+}
+
+ul.inner2 {
+    list-style-position: outside;
+    list-style-image: none;
+    list-style-type: circle;
+}

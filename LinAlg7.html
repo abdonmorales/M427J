@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="LinAlg.css">
+<style>.equation { color: rgb(0, 51, 153); }</style>
+<style>
+ul {
+    list-style-position: outside;
+    list-style-image: url('bluedot.gif');
+}
+ul.inner {
+    list-style-position: outside;
+    list-style-image: none;
+    list-style-type: disc;
+}
+ul.inner2 {
+    list-style-position: outside;
+    list-style-image: none;
+    list-style-type: circle;
+}
+</style>
+<title>LA7 for DE</title>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage"});</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>
+</head>
+<body>
+
+<br>
+<h1>Span</h1>
+<br>
+
+<div class="sectionhead">1. Basics of Span</div>
+
+<p class="tabbed">A general way of creating subspaces of a
+vector space is in terms of linear combinations.</p>
+
+<div class="bluebox">
+Let $V$ be a vector space and $S = \left\{ \ {\bf v}_1,\, {\bf v}_2,\, \ldots, 
+\, {\bf v}_k \ \right\} \subseteq V$ be a finite subset of $V.$ By a <b>Linear
+Combination</b> of the vectors in $S$ we mean any vector ${\bf v} \in V$ of the form
+$$
+{\bf v} = \alpha_1 {\bf v}_1 + \alpha_2 {\bf v}_2 + \cdots + \alpha_k {\bf v}_k
+$$
+where $\alpha_1 , \alpha_2 , \dots , \alpha_k \in \mathbb{R}.$
+<p class="tabbed">The set of all linear combinations of vectors in $S$ is called the 
+<b>Span</b> of $S:$
+$$\textrm{Span}( \ S \ ) = \textrm{Span}\left\{\,{\bf v}_1,\, {\bf v}_2,\, \ldots, \, {\bf
+  v}_k\right\} = \left\{\, c_1 {\bf v}_1 + c_2 {\bf v_2} + \ldots +
+  c_k {\bf v}_k\,\middle\vert \, c_1 , \dots , c_k \ \in \ {\mathbb R}\,\right\}.$$</p>
+<p class="tabbed">When 
+$$\textrm{Span}( \ S \ ) = \textrm{Span}\big\{\,{\bf v}_1,\, {\bf v}_2,\,
+  \ldots, \, {\bf v}_k\big\} \ = \ V$$
+we say that $S$ <b>Spans</b> $V,$ or that $S$ is a <b>Spanning Set</b> for $V.$</p>
+</div>
+
+<br>
+
+<div class="bluebox">
+<b>Theorem 1:</b> The
+  $\,\textrm{Span}\big\{\,{\bf v}_1,\, {\bf v}_2,\,\ldots, \, {\bf
+  v}_k\big\}$ of vectors ${\bf v}_1,\,
+  {\bf v}_2,\, \ldots, \, {\bf v}_k$ in a vector space $V$ is a
+  subspace of $V,$ hence a vector space.
+</div>
+
+<br>
+
+<table class="twocol">
+<tbody><tr>
+<td>
+<b>Proof:</b> We check that
+$$\,\textrm{Span}\big\{\,{\bf v}_1,\, {\bf
+  v}_2,\, \ldots, \, {\bf v}_k\big\}$$
+  has the three properties of a subspace. For ease
+  of notation, suppose $k = 2$
+
+<p><b>Property Z:</b> Take $c_1 = c_2 = 0$. Then
+  $\textrm{Span}\{{\bf v}_1,\, {\bf v}_2\}$ contains $ 0 {\bf v}_1 + 0
+  {\bf v}_2 = {\bf 0}_V$.</p>
+
+  <p><b>Property AC:</b> Fix arbitrary vectors in
+  $\textrm{Span}\{{\bf v}_1,\, {\bf v}_2\}$, 
+say
+  $${\bf u} \,=\, c_1 {\bf v}_1 + c_2 {\bf
+  v}_2, \quad {\bf v} \,=\, d_1 {\bf v}_1 + d_2 {\bf v}_2,$$</p>
+</td>
+<td>
+<p>  then
+ $${\bf u} + {\bf v} \,=\, (c_1+d_1){\bf v}_1 + (c_2+d_2){\bf v}_2\,,$$
+  which shows that ${\bf u}+{\bf v}$ belongs to $\textrm{Span}\{{\bf v}_1,\, {\bf v}_2\}$.
+  <p><b>Property SC:</b> Now fix an arbitrary scalar
+  $k$. Then
+  $$k {\bf u} \,=\, k(c_1 {\bf v}_1 + c_2 {\bf
+  v}_2) \,=\, (k c_1){\bf v}_1 + (k c_2){\bf v}_2\,,$$
+  which shows that $k {\bf u}$ belongs to $\textrm{Span}\{{\bf v}_1,\,
+  {\bf v}_2\}$.</p>
+
+  <p class="tabbed">Thus $\textrm{Span}\{{\bf v}_1,\,
+  {\bf v}_2\}$ is a subspace of $V$.</p>
+</td>
+</tr></tbody>
+</table>
+
+<p>&nbsp; &nbsp; For a single nonzero vector, ${\bf v},$ $\textrm{Span}({\bf v}) = \{ t \ {\bf
+v} \, | \, -\infty \, < t \, < \,\infty\,\}$ consists of <em>all</em>
+scalar multiples of ${\bf v}$. Geometrically, this is a <em>Line</em>
+in ${\mathbb R}^n$ passing through the origin at $t = 0$. By Fundamental Theorem 1, this line is
+a subspace of ${\mathbb R}^n$. Can you see why the line $\{ {\bf
+u} + t {\bf v} \ | \, -\infty < t < \infty \, \}$ through ${\bf u}$ in
+the direction of ${\bf v}$ is <em>not</em> a subspace? Similarly, the
+span of two vectors is usually a plane through the origin, hence a subspace
+of ${\mathbb R}^3$, but a plane not passing through the origin is
+<em>not</em> a subspace of ${\mathbb R}^3$.</p>
+
+<p class="tabbed">Another way to describe $\textrm{Span}( \ S \ )$ is to say it is the smallest 
+subspace of $V$ containing the set $S$.</p>
+
+<div class="bluebox">
+<b>Theorem 2:</b> If $W$ is a subspace of a vector space $V,$ and 
+$S = \left\{ \ {\bf v}_1,\, {\bf v}_2,\, \ldots, \, {\bf v}_k \ \right\}$ is a 
+subset of $W,$ then $\textrm{Span}( \ S \ )$ is a subspace of $W.$
+$$ S \subseteq W \subseteq V \quad \Rightarrow \quad 
+\textrm{Span}(S) \subseteq W \subseteq V.$$
+</div>
+
+<br>
+
+We use this fact frequently in solving differential equations. For example, let $L[ \ y \ ] = y^{\, \prime \prime} + y = 0$. We know that $V_L$ is a subspace of $C(\mathbb{R})$, and we know that $S = \left\{ \cos t , \sin t \right\} \subseteq V_L$ since both $\cos t$ and $\sin t$ are solutions to the differential equation. Thus, by Theorem 2, we know that $\textrm{Span}( \ S \ )$ is a subspace of $V_L:$
+$$\textrm{Span}( \ S \ ) = \left\{ \ c_1 \cos t + c_2 \sin t \ \middle\vert \ c_1 , c_2 \in \mathbb{R} \ \right\} \subseteq V_L.$$
+The fact that they are equal, $\textrm{Span}( \ S \ ) = V_L,$ comes from a theorem in differential equations. See <em>Differential Equations and Their Applications</em> by Martin Braun, section 2.1, Theorem 2.
+
+<br><br>
+
+<div class="sectionhead">2. Examples</div>
+
+<p class="tabbed">
+When studying subspaces, we saw that every vector space $V$ is a subspace of itself,
+so every vector space is a subspace. Similarly, every vector space is a span.
+</p>
+
+<div class="bluebox">
+<b>Theorem 3:</b> Every finite dimensional vector space, $V \cong \mathbb{R}^n,$ 
+can be expressed as the span of a finite set $S.$ That is, there exist vectors 
+${\bf v}_1 , \dots , {\bf v}_k \in V$ such that $$V = \textrm{Span}\left\{ {\bf v}_1, 
+\dots , {\bf v}_k \right\}.$$
+</div>
+
+<br>
+
+<b>WARNING:</b> The spanning set $S$ is <b>NOT</b> unique. For example, the $x$-axis in $\mathbb{R}^2$ can be expressed as
+$$\left\{ \left[ \begin{array}{c} x \\ 0 \end{array} \right] \ \middle\vert \ x \in \mathbb{R} \right\} = \textrm{Span}\left\{ \left[ \begin{array}{c} 1 \\ 0 \end{array} \right] \right\} = \textrm{Span}\left\{ \left[ \begin{array}{c} -1 \\ 0 \end{array} \right] \right\} = \textrm{Span}\left\{ \left[ \begin{array}{c} \sqrt{2} \\ 0 \end{array} \right] \right\}.$$<br>
+
+
+Let us use this theorem to construct spanning sets for all the vector spaces (finite-dimensional only) that we have seen so far.
+
+<ul>
+<li>
+<b>$n$-space, $\mathbb{R}^n$</b>
+<ul class="inner">
+<li>
+In $\mathbb{R}^n$, we have the following vectors:
+$$e_1 = \left[ \begin{array}{c} 1 \\ 0 \\ \vdots \\ 0 \end{array} \right], \quad e_2 = \left[ \begin{array}{c} 0 \\ 1 \\ \vdots \\ 0 \end{array} \right], \quad \cdots, \quad e_n = \left[ \begin{array}{c} 0 \\ 0 \\ \vdots \\ 1 \end{array} \right].$$
+Consider $\textrm{Span}\{e_1, e_2, \dots, e_n \} \subseteq \mathbb{R}^n:$
+
+$$\textrm{Span}\left\{e_1, e_2, \dots, e_n \right\} =
+\left\{ \alpha_1 \cdot e_1 + \alpha_2 \cdot  e_2 + \cdots + \alpha_n \cdot e_n \, \middle\vert \, \, \alpha_1, \alpha_2, \dots, \alpha_n \in \mathbb{R} \right\} =$$
+
+$$= \left\{ \ \alpha_1 \cdot \left[ \begin{array}{c} 1 \\ 0 \\\vdots \\ 0 \end{array} \right] + \alpha_2 \cdot  \left[ \begin{array}{c} 0 \\ 1 \\ \vdots \\ 0 \end{array} \right] + \cdots + \alpha_n \cdot \left[ \begin{array}{c} 0 \\ 0 \\ \vdots \\ 1 \end{array} \right]  \ \ \middle\vert \, \, \alpha_1, \alpha_2, \dots, \alpha_n \in \mathbb{R} \ \right\} =$$
+
+$$= \left\{ \ \left[ \begin{array}{c} \alpha_1 \\ 0 \\ \vdots \\ 0 \end{array} \right] + \left[ \begin{array}{c} 0 \\ \alpha_2 \\ \vdots \\ 0 \end{array} \right] + \cdots + \left[ \begin{array}{c} 0 \\ 0 \\ \vdots \\ \alpha_n \end{array} \right]  \ \ \middle\vert \, \, \alpha_1, \alpha_2, \dots, \alpha_n \in \mathbb{R} \ \right\} =$$
+
+$$= \left\{ \ \left[ \begin{array}{c} \alpha_1 \\ \alpha_2 \\ \vdots \\ \alpha_n \end{array} \right] \ \ \middle\vert \, \, \alpha_1, \alpha_2, \dots, \alpha_n \in \mathbb{R} \ \right\} = \mathbb{R}^n.$$
+
+Thus, the most fundamental vector space is immediately defined as a span:
+$$\mathbb{R}^n = \textrm{Span}\{e_1, e_2, \dots, e_n \}.$$
+</li>
+<li>
+Every line through the origin in $\mathbb{R}^2$ can be realized as the span of a non-zero vector. In particular, the line with slope $m$ is given by 
+$$\left\{ \left[ \begin{array}{c} x \\ y \\ \end{array} \right] \, \middle\vert \, \, y = m x \right\} = 
+\left\{ \left[ \begin{array}{c} x \\ m x \\ \end{array} \right] \, \middle\vert \, \, x \in \mathbb{R} \right\} =
+\textrm{Span}\left\{ \left[ \begin{array}{c} 1 \\ m \\ \end{array} \right] \right\}$$
+and the vertical line (with infinite slope) is given by
+$$\left\{ \left[ \begin{array}{c} 0 \\ y \\ \end{array} \right] \, \middle\vert \, \, y \in \mathbb{R} \right\} =
+\textrm{Span}\left\{ \left[ \begin{array}{c} 0 \\ 1 \\ \end{array} \right] \right\}.$$
+Similarly, every plane in $\mathbb{R}^3$ can be expressed as the spane of two vectors. See Example 1 above.
+</li>
+<li>
+It is crucial for us to express the null space of a matrix $A$ as a span. This is the reason we have been so insistent on expressing our solutions in vector form. For example, in your last homework, <a href="LinAlg7HW.html" target="_blank">LinAlg7HW.html<a>, we expressed the solution to Beezer's Example CNS1 as
+$$\textrm{Nul}(A) = \left\{ \ r \left[\begin{array}{c} 
+	-2 \\ 3 \\ 1 \\ 0 \\ 0 \\ \end{array}\right] + s \, \left[\begin{array}{c} 
+	-1 \\ -4 \\ 0 \\ -2 \\ 1 \\ \end{array}\right] \ \middle\vert \ r , s \in \mathbb{R} \ \right\}.$$
+Now we can easily see how to express this as a span:
+$$\textrm{Nul}(A) = \left\{ \ r \left[\begin{array}{c} 
+	-2 \\ 3 \\ 1 \\ 0 \\ 0 \\ \end{array}\right] + s \, \left[\begin{array}{c} 
+	-1 \\ -4 \\ 0 \\ -2 \\ 1 \\ \end{array}\right] \ \middle\vert \ r , s \in \mathbb{R} \ \right\} = \textrm{Span}\left\{ \ \left[\begin{array}{c} 
+	-2 \\ 3 \\ 1 \\ 0 \\ 0 \\ \end{array}\right] , \ \left[\begin{array}{c} 
+	-1 \\ -4 \\ 0 \\ -2 \\ 1 \\ \end{array}\right] \ \right\}.$$
+</li>
+</ul>
+</li>
+<li><b>Matrices:</b><br>
+Let's look at some examples of expressing different matrix spaces as spans.
+<ul class="inner">
+<li>
+$$M_{2 \times 3}(\mathbb{R}) = \textrm{Span}\left\{ \ 
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 1 & 0 \\ 0 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 1 \\ 0 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 0 \\ 1 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 0 \\ 0 & 1 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 0 \\ 0 & 0 & 1 \\ \end{array} \right] \
+\right\}.$$
+</li>
+<li>
+$$D_3 = \textrm{Span}\left\{ \ 
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \\ \end{array} \right] \
+\right\}.$$
+</li>
+<li>
+$$UT_2 = \textrm{Span}\left\{ \ 
+\left[ \begin{array}{cc} 1 & 0 \\ 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{cc} 0 & 1 \\ 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{cc} 0 & 0 \\ 0 & 1 \\ \end{array} \right] \
+\right\}.$$
+</li>
+</ul>
+</li>
+<li><b>Polynomials:</b>
+<ul class="inner">
+<li>
+$$\mathcal{P}_n = \textrm{Span}\{1, t, t^2, \dots, t^n\} \textrm{.}$$
+</li>
+<li>Similar to our last homework set, Exercise S.T30:
+$$W = \left\{ \ p \in \mathcal{P}_8 \ \middle\vert \ p \textrm{ has terms of only even degree } \right\}
+= \textrm{Span}\{1, t^2, t^4, t^6, t^8 \} \textrm{.}$$
+</li>
+<li>
+$$V = \left\{ \ p \in \mathcal{P}_5 \ \middle\vert \ p(0) = 0 \ \right\}
+= \textrm{Span}\{ t, t^2, t^3, t^4, t^5 \} \textrm{.}$$
+</li>
+</ul>
+</li>
+
+<li><b>Complex Numbers, $\mathbb{C}:$</b>
+<ul class="inner">
+<li>
+The complex numbers themselves are a span, $\mathbb{C} = \textrm{Span}\left\{ 1, i \right\}$.
+</li>
+<li>
+The real numbers are a subspace of $\mathbb{C}:$ $\mathbb{R} = \textrm{Span}\left\{ 1 \right\} \subseteq \mathbb{C}.$
+</li>
+<li>
+The imaginary numbers are also subspace of $\mathbb{C}:$ 
+$V = \left\{ z \in \mathbb{C} \ \middle\vert \ z = \beta i \textrm{ for some } \beta \in \mathbb{R} \right\} = \textrm{Span}\left\{ i \right\} \subseteq \mathbb{C}.$
+</li>
+</ul>
+</li>
+
+<li><b>Differential Equations:</b>
+<ul class="inner">
+<li>
+Consider the homogeneous equation
+$$L [ \ y \ ] = y^{\ \prime \prime} - y = 0.$$
+If we solve this equation using the roots of the characteristic polynomial, $p(r) = r^2-1$, we get $V_L = \textrm{Span} \left\{ e^t , e^{-t} \right\}.$ On the other hand, if we solve this equation using series solutions, we get $V_L = \textrm{Span} \left\{ \cosh(t) , \sinh(t) \right\}.$ Let us explore this using the idea of span. The definitions of $\cosh(t)$ and $\sinh(t)$ are
+$$\cosh(t) = \frac{1}{2} e^t + \frac{1}{2} e^{-t} \quad \quad \textrm{ and } \quad \quad \sinh(t) = \frac{1}{2} e^t - \frac{1}{2} e^{-t}$$
+which shows us that both $\cosh(t)$ and $\sinh(t)$ are <em>linear combinations</em> of $e^t$ and $e^{-t}$. Thus $\cosh(t), \sinh(t) \in \textrm{Span} \left\{ e^t , e^{-t} \right\},$ a vector space. So by Theorem 2, we have $\textrm{Span} \left\{ \cosh(t) , \sinh(t) \right\} \subseteq \textrm{Span} \left\{ e^t , e^{-t} \right\}.$ 
+<br>
+&nbsp; &nbsp; Again, using the definitions of $\cosh(t)$ and $\sinh(t),$ we have that $\cosh(t)+\sinh(t) = e^t$ and $\cosh(t)-\sinh(t) = e^{-t}.$ This means $e^t$ and $e^{-t}$ are <em>linear combinations</em> of $\cosh(t)$ and $\sinh(t),$ so $e^t, e^{-t} \in \textrm{Span} \left\{ \cosh(t) , \sinh(t) \right\},$ a vector space. So by Theorem 2, we have $\textrm{Span} \left\{ e^t , e^{-t} \right\} \subseteq \textrm{Span} \left\{ \cosh(t) , \sinh(t) \right\}.$ Together, $\textrm{Span} \left\{ \cosh(t) , \sinh(t) \right\} \subseteq \textrm{Span} \left\{ e^t , e^{-t} \right\}$ and $\textrm{Span} \left\{ e^t , e^{-t} \right\} \subseteq \textrm{Span} \left\{ \cosh(t) , \sinh(t) \right\}$ imply that the two sets are equal:
+$$V_L = \textrm{Span} \left\{ e^t , e^{-t} \right\} = \textrm{Span} \left\{ \cosh(t) , \sinh(t) \right\}.$$
+</li>
+<li>
+Consider the homogeneous equation
+$$L [ \ y \ ] = y^{(3)} + 4y^{\ \prime} = 0.$$
+If we solve this equation using the roots of the characteristic polynomial, $p(r) = r^3+4r = r(r^2+4)$, we get $V_L = \textrm{Span} \left\{ \cos(2t) , \sin(2t), 1 \right\}.$ Using trigonometric identities, we can see that
+$$V_L = \textrm{Span} \left\{ \cos(2t) , \sin(2t), 1 \right\} = \textrm{Span} \left\{ \cos^2(t) , \cos(t)\sin(t), \sin^2(t) \right\},$$
+which are the degree 2 monomials in $\cos(t)$ and $\sin(t)$. We will see this example done in the homework.
+</li>
+<li>Let
+$$A = \left[ \begin{array}{cc} 2 & 0 \\ 0 & -3 \\ \end{array} \right],$$
+then
+$$V_A = \textrm{Span} \left\{ 
+\left[ \begin{array}{c} e^{2t} \\ 0 \\ \end{array} \right] ,
+\left[ \begin{array}{c} 0 \\ e^{-3t} \\ \end{array} \right]
+\right\}.$$
+We can see by plugging in that these are solutions to the system
+$$\frac{d}{dt} \vec{x}(t) = \left[ \begin{array}{cc} 2 & 0 \\ 0 & -3 \\ \end{array} \right] \vec{x}(t),$$
+and we know from our text that $V_A$ is a vector space, so by Theorem 2 we have 
+$$\textrm{Span} \left\{ 
+\left[ \begin{array}{c} e^{2t} \\ 0 \\ \end{array} \right] ,
+\left[ \begin{array}{c} 0 \\ e^{-3t} \\ \end{array} \right]
+\right\} \subseteq V_A.$$
+We will know that this is the entirety of $V_A$ after we have explored the idea of a <em>basis</em> in a later lesson.
+</li>
+<li>
+Let
+$$A = \left[ \begin{array}{cc} 0 & 1 \\ 1 & 0 \\ \end{array} \right].$$
+Then $\frac{d}{dt} \vec{x}(t) = A \vec{x}(t)$ is the second order, homogeneous equation $L [ \ y \ ] = y^{\ \prime \prime} - y = 0$ (from the example above), converted into a linear system. Using the solutions to the O.D.E., and the fact that $x_2 = x_1^{\ \prime},$ we see that
+$$V_A = \textrm{Span} \left\{ 
+\left[ \begin{array}{c} e^t \\ e^t \\ \end{array} \right] ,
+\left[ \begin{array}{c} -e^{-t} \\ e^{-t} \\ \end{array} \right]
+\right\} = \textrm{Span} \left\{ 
+\left[ \begin{array}{c} \cosh(t) \\ \sinh(t) \\ \end{array} \right] ,
+\left[ \begin{array}{c} \sinh(t) \\ \cosh(t) \\ \end{array} \right]
+\right\}.$$
+</li>
+</ul>
+</li>
+
+</ul>
+
+<br><br><br><br><br><br><br><br>
+</body>
+</html>

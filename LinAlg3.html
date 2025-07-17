@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="LinAlg.css">
+<title>LA3 for DE</title>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage"});</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>  
+</head>
+<body>
+
+<br>
+<h1>Matrix Inverses</h1>
+<br>
+
+<div class="sectionhead">Matrix Inverses</div>
+
+<p class="tabbed">Recall that the <b>Identity</b> matrix 
+$I_n \in M_n(\mathbb{R})$  
+is the matrix 
+$$
+I_n = \left[ \begin{array}{cccc} 
+1 & 0 & \cdots & 0 \\ 
+0 & 1 & \cdots & 0 \\ 
+\vdots & \vdots & \ddots & \vdots \\ 
+0 & 0 & \cdots & 1 \\ 
+\end{array} \right] 
+$$
+It's called the identity because $A I_n = I_n A = A$ for 
+every matrix $A\in M_n(\mathbb{R});$ in
+other words, it does for matrices what the number $1$ does for
+multiplication of numbers.</p>
+
+<div class="bluebox">
+A matrix $A \in M_n(\mathbb{R})$ is <b>Invertible</b> if there
+exists another matrix $B \in M_n(\mathbb{R})$ such that
+$$A B = B A = I_n.$$
+<p class="tabbed">
+If $A$ is invertible, we call $B$ the <b>Inverse</b> of $A$ and
+denote it $B = A^{-1}.$
+Another term for invertible is <b>Nonsingular</b>. If a matrix does
+not have an inverse, it is called <b>Singular</b>.</p>
+</div>
+
+<p>Here are some properties of the inverse:</p>
+
+<div class="greenbox">
+Let $A$ and $B \in M_n(\mathbb{R})$ be invertible. Then
+<ul class="greenul">
+<li>The inverse of $A,$ $A^{-1},$ is unique.</li>
+<li>$\left( A^{-1} \right)^{-1} = A.$</li>
+<li>$\left( A B \right)^{-1} = B^{-1} A^{-1}.$</li>
+<li>$A {\bf x} = {\bf b}$ has a unique solution
+${\bf x} = A^{-1} {\bf b}$ for each ${\bf b} \in \mathbb{R}^n.$
+</li>
+</ul>
+</div>
+
+<p class="tabbed">There is an easy formula that is important to 
+remember for  computing the inverse of a nonsingular $2 \times 2$ 
+matrix.</p>
+
+<div class="bluebox">Let 
+$$A = \left[ \begin{array}{cc} a & b \\ c & d \\ \end{array}
+\right] \in M_2(\mathbb{R}).$$
+<ul class="blueul">
+<li>The <b>Determinant</b> of $A$ is
+$$\textrm{det}(A) = a d - b c.$$
+</li>
+<li>$A$ is nonsingular if and only if det$(A) \neq 0.$
+</li>
+<li>If $A$ is nonsingular, then
+$$A^{-1} = \frac{1}{\textrm{det}(A)} \left[ \begin{array}{cc} 
+d & -b \\ -c & a \\ \end{array} \right].$$
+</li>
+</ul>
+</div>
+
+<p>Let's use the inverse to solve a linear system.</p>
+
+<table class="twocol">
+<tbody><tr>
+<td>
+<b>Problem:</b> Solve 
+$$ \begin{array}{rcc}2x + y & = \  2 \, , \\
+6x + 4y & = \ 4 \, . \\ \end{array}$$
+<br>
+<b>Solution:</b> Instead of converting the system into an augmented 
+matrix and row reducing, we consider the matrix equation
+$$A {\bf x} = \left[ \begin{array}{cc} 2 & 1 \\ 6 & 4 \\ \end{array}
+\right] {\bf x} = \left[ \begin{array}{c} 2 \\ 4 \\ \end{array}
+\right].$$
+</td>
+<td>
+Here
+$$\textrm{det}(A) = 2 \cdot 4 - 1 \cdot 6 = 2 \neq 0$$
+so $A$ is invertible with inverse
+$$A^{-1} = \frac{1}{2} \left[ \begin{array}{cc} 4 & -1 \\ 
+-6 & 2 \\ \end{array} \right] = \left[ \begin{array}{cc} 
+2 & -\frac{1}{2} \\ -3 & 1 \\ \end{array} \right].$$
+Thus the solution to the system is
+$${\bf x} = A^{-1} \left[ \begin{array}{c} 2 \\ 4 \\ \end{array}
+\right] = \left[ \begin{array}{cc} 
+2 & -\frac{1}{2} \\ -3 & 1 \\ \end{array} \right] \left[ 
+\begin{array}{c} 2 \\ 4 \\ \end{array} \right] = \left[ 
+\begin{array}{c} 2 \\ -2 \\ \end{array} \right].$$
+</td>
+</tr></tbody>
+</table>
+
+<p class="tabbed">An $n \times n$ matrix $A$ is invertible if and 
+only if $\text{RREF}(A) = I_n$. There are many such criteria 
+equivalent to the invertibility of a matrix. Here are a few.</p>
+
+<div class="bluebox">
+<b>Theorem:</b> For $A \in M_n(\mathbb{R}),$ the following are
+equivalent:
+<ul class="blueul">
+<li>$A$ is invertible, i.e., there exists a matrix 
+$A^{-1} \in M_n(\mathbb{R})$ such that $A A^{-1} = A^{-1} A = I_n.$
+</li>
+<li>The matrix equation $A {\bf x} \, = \, {\bf b}$ has
+a unique solution for every ${\bf b} \in {\mathbb R}^n.$
+</li>
+<li>The matrix equation $A {\bf x} \, = \, {\bf 0}$ has
+only the trivial solution.
+</li>
+<li>The reduced row echelon form of $A$ is $I_n,$ i.e., 
+$\textrm{RREF}(A) = I_n.$
+</li>
+</ul>
+</div>
+
+<p>The last criterion gives us an algorithm for computing inverses
+of matrices that are bigger than $2 \times 2.$</p>
+
+<div class="bluebox">To compute the inverse of a nonsingular 
+matrix $A \in M_n(\mathbb{R}),$ create the augmented matrix with $A$
+on the left of the vertical bar and the identity matrix $I_n$ on
+the right of the vertical bar and row reduce. 
+$$\left[ \begin{array}{c|c} A & I_n \\ \end{array} \right]
+\rightarrow \textrm{RREF} \left(
+\left[ \begin{array}{c|c} A & I_n \\ \end{array} \right]
+\right) = \left[ \begin{array}{c|c} I_n & A^{-1} \\ \end{array} 
+\right].$$
+The resulting matrix to the right of the vertical bar will be 
+$A^{-1}.$
+</div>
+
+<br>
+
+<table class="twocol">
+<tbody><tr>
+<td>
+<b>Problem:</b> Find $A^{-1}$ when
+$$A \ = \ \left[\begin{array}{ccc} 0 & 1 & 2 \\ 1 & 0 & 3 \\ 
+4 & -3 & 8 \\ \end{array} \right].$$
+<br>
+<b>Solution:</b> 
+$$\left[ \begin{array}{c|c} A & I_3 \\ \end{array} \right] = 
+\left[ \begin{array}{ccc|ccc} 
+0 & 1 & 2 & 1 & 0 & 0 \\
+1 & 0 & 3 & 0 & 1 & 0 \\
+4 & -3 & 8 & 0 & 0 & 1 \\
+\end{array} \right]$$
+</td>
+<td>
+row reduces to
+$$\left[ \begin{array}{c|c} A & I_3 \\ \end{array} \right] = 
+\left[ \begin{array}{ccc|ccc} 
+1 & 0 & 0 & -9/2 & 7 & -3/2 \\
+0 & 1 & 0 & -2 & 4 & -1 \\
+0 & 0 & 1 & 3/2 & -2 & 1/2 \\
+\end{array} \right]$$
+thus
+$$ A^{-1} \ = \ \left[\begin{array}{ccc} -9/2 & 7 & - 3/2 \\
+-2 & 4 & -1 \\ 3/2 & -2 & 1/2 \\ \end{array}\right].$$
+</td>
+</tr></tbody>
+</table>
+
+<br>
+
+
+<br><br>
+</body></html>

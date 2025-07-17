@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="LinAlg.css">
+<style>.equation { color: rgb(0, 51, 153); }</style>
+<style>
+ul {
+    list-style-position: outside;
+    list-style-image: url('bluedot.gif');
+}
+ul.inner {
+    list-style-position: outside;
+    list-style-image: none;
+    list-style-type: disc;
+}
+ul.inner2 {
+    list-style-position: outside;
+    list-style-image: none;
+    list-style-type: circle;
+}
+</style>
+<title>LA8 for DE</title>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage"});</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>
+</head>
+<body>
+	
+<br>
+<h1>Basis</h1>
+<br>
+
+<div class="sectionhead">1. Linear Dependence and Independence</div>
+
+<br>
+
+<div class="bluebox">
+A set $\big\{{\bf v}_1,\, {\bf v}_2,
+  \dots , \, {\bf v}_k\big\}$ of vectors in a real vector space $V$ is said to be
+  <b>Linearly Independent</b> when the vector equation
+  $$x_1 {\bf v}_1 + x_2 {\bf v}_2 + \dots + x_k {\bf v}_k \ = \ {\bf
+  0}_V$$
+  has only the trivial solution</em> $x_1 = x_2 =  \ldots = x_k = 0\,.$
+<p class="tabbed">The set is said to be <b>Linearly Dependent</b> if there
+  exist real numbers $c_1,\, c_2, \, \ldots,\, c_k$, <em>NOT ALL ZERO</em>, such
+  that
+  $$c_1 {\bf v}_1 + c_2 {\bf v}_2 + \dots + c_k {\bf v}_k \ = \ {\bf
+  0}_V.$$</p>
+</div>
+
+<p>Some simple criteria for linear independence will be useful:</p>
+
+<div class="greenbox">
+When $V$ is a vector space, 
+<ul class="greenul">
+<li>A set $\left\{ {\bf v}_1 \right\}$ containing only one vector in $V$ is linearly
+   independent unless ${\bf v}_1 = {\bf 0}.$
+</li>
+<li>A set $\big\{{\bf v}_1,\, {\bf v}_2 \big\}$ in $V$ is
+linearly dependent if and only if ${\bf v}_2$ is a scalar
+multiple of ${\bf v}_1$ because
+$$\alpha_1 {\bf v}_1 + \alpha_2 {\bf v}_2 \,=\, {\bf 0} \quad \Longleftrightarrow
+\quad {\bf v}_1 \,=\ -\left(\frac{\alpha_2}{\alpha_1}\right) {\bf v}_2 \ \ \ \textrm{or}\ \ \ {\bf v}_2
+\,=\ -\left(\frac{\alpha_1}{\alpha_2}\right) {\bf v}_1 $$
+unless $\alpha_1 = \alpha_2 = 0.$
+</li>
+<li>Any set $\left\{{\bf v}_1,\, \ldots, \,{\bf v}_{k-1},\, {\bf 0}_V,\, {\bf
+   v}_{k+1},\,\dots,\, {\bf v}_p\, \right\}$ containing the zero vector
+  ${\bf 0}_V$ is linearly dependent because
+$$c_1 {\bf v}_1 + \ldots + c_{k-1}{\bf v}_{k-1} + c_k{\bf 0}_V + c_{k+1} {\bf v}_{k+1} +
+   \dots + c_p {\bf v}_p \ = \ {\bf 0}_V$$ when $c_j = 0$ for $j \ne k$ but $c_k = 1.$
+</li>
+<li>Any subset of a linearly independent set $\left\{{\bf v}_1, \ldots,
+{\bf v}_p \right\}$ in $V$ is again linearly independent.
+</li>
+</ul>
+</div>
+
+<br>
+
+<div class="bluebox">
+<b>Theorem 1:</b> Let
+$\left\{ {\bf v_1} , \dots , {\bf v_k} \right\} \subseteq \mathbb{R}^n$ and let
+$$A = \left[ \begin{array}{ccc} {\bf v_1} & \cdots & {\bf v_k} \end{array} \right]
+\in M_{n \times k}(\mathbb{R}).$$ The following are equivalent:
+<ul class="blueul">
+<li>The set $\left\{ {\bf v_1} , \dots , {\bf v_k} \right\}$ is linearly independent.</li>
+<li>The homogeneous matrix equation $A {\bf x} = {\bf 0}$ has only the trivial solution.</li>
+<li>The kernel of $A$ is trivial: ker$(A) = \left\{ {\bf 0} \right\}.$</li>
+<li>Every column in RREF$(A)$ is a pivot column.</li>
+</div>
+
+<p>These criteria are used to check the linear dependence or
+independence of a set of vectors.</p>
+
+<table class="twocol">
+<tbody><tr>
+<td>
+<b>Problem:</b> Determine if the vectors
+  $${\bf v}_1 \,=\, \left[\begin{array}{cc} 1
+  \\ 2 \\ 1 \end{array}\right], \quad {\bf v}_2 \,=\, \left[\begin{array}{cc} 1
+  \\ 3 \\ 4 \end{array}\right], \quad {\bf v}_3 \,=\, \left[\begin{array}{cc} -1
+  \\ 1 \\ 9 \end{array}\right], $$
+  in ${\mathbb R}^3$ are linearly independent.
+
+  <p><b>Solution:</b> We need to check if the homogeneous
+  equation
+  $$A {\bf x} \ = \ \left[\begin{array}{cc} 1 & 1 & -1 \\
+  2 & 3 & 1 \\ 1 & 4 & 9 \end{array} \right] \left[\begin{array}{cc}
+  x_1 \\ x_2 \\ x_3 \end{array} \right] \ = \ {\bf 0}$$
+  has only the trivial solution ${\bf x } \,=\, {\bf 0}$.
+  We must row reduce
+</td>
+<td>
+$$A = \left[\begin{array}{cc} 1 & 1 & -1 \\
+  2 & 3 & 1 \\ 1 & 4 & 9 \\ \end{array} \right]$$
+  to get
+$$\textrm{RREF}(A) = \left[\begin{array}{cc} 1 & 0 & 0 \\
+  0 & 1 & 0 \\ 0 & 0 & 1 \\ \end{array} \right],$$
+so the only solution of $A {\bf x} \,=\, {\bf 0}$ is
+  $$x_1 \ = \  x_2 \ = \  x_3 \ = \ 0\,.$$
+Thus ${\bf v}_1, \, {\bf v}_2$ and ${\bf v}_3$ are linearly independent.
+</td>
+</tr></tbody>
+</table>
+
+<p> &nbsp; &nbsp; The next three results illustrate how familiar
+concepts and results from mathematics seemingly unrelated to Linear
+Algebra enter. The first one involves trig identities, while the next
+two bring in the idea of Wronskians from Differential equations and
+one version of the Fundamental Theorem of Algebra.
+</p>
+
+<p><table style="margin-left: auto; width: 900px;margin-right: auto;
+  text-align: left;" border="3" bordercolor="lightgray" cellspacing="2" cellpadding="5"
+  ">
+<tbody>
+<tr>
+<td style="width: 425px; height: 200px; text-align: left;
+  vertical-align: top; padding-left: 0.5cm; padding-right: 0.5cm;">
+<p>&nbsp;  <b>Example 2:</b> <em> are the trig functions
+  <span class="equation">
+  $$1,\ \ \cos x,\ \ \sin x,\ \ \cos^2 x,\ \ \sin^2 x,\, \cos x \sin x, $$</span>
+  in $C^{\ \infty}(\mathbb{R})$ linearly independent</em>?
+  </p>
+
+</td>
+<td style="width: 475px; height: 200px;  padding-left: 0.5cm; padding-right: 0.5cm;
+  vertical-align: top;">
+<p>  &nbsp; &nbsp; <b>Solution:</b> since $\cos^2 x + \sin^2 x - 1 =
+  0$, any subset of the trig functions
+<span class="equation">  $$1,\ \ \cos x,\ \ \sin x,\ \ \cos^2 x,\ \
+  \sin^2 x,\, \cos x \sin x,$$</span>
+  containing $1, \ \cos^2x,\ \sin^2x$ will be linearly dependent. </p>
+  </td>
+</tr>
+</tbody>
+</table></p>
+<br>
+
+<p> &nbsp; &nbsp; Recall now one version of the Fundamental Theorem of
+Algebra.</p>
+
+<p><table style="margin-left: auto; width: 775px; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm;
+  padding-top: 0.1cm; padding-right: 0.5cm; padding-bottom: 0.1cm; color: rgb(0, 51, 153);
+ background: rgb(224,240,255);">
+</p>&nbsp; &nbsp; <b>Fundamental Theorem of Algebra:</b> <em> a degree
+  $n$ polynomial
+  $$P(x) \ = \ a_0 \, + \, a_1 x \, +\, a_2 x^2 \, + \, \ldots \, + \,
+  a_n x^n$$
+  with real coefficients has </em><b>at most</b><em> $n$ real roots,
+  i.e., the graph of $y = P(x)$ crosses the $x$-axis at most $n$ times.</p>
+</td>
+</tr>
+</tbody>
+</table></p>
+<br>
+
+<p><table style="margin-left: auto; width: 900px;margin-right: auto;
+  text-align: left;" border="3" bordercolor="lightgray" cellspacing="2" cellpadding="5"
+  ">
+<tbody>
+<tr>
+<td style="width: 425px; height: 200px; text-align: left;
+  vertical-align: top; padding-left: 0.5cm; padding-right: 0.5cm;">
+<p>&nbsp;  <b>Example 3:</b> <em> the monomials
+  <span class="equation">
+  $$1,\quad x, \quad x^2, \quad \ldots,\quad x^m,\quad \ldots \quad x^N, $$</span>
+ are linearly independent in the vector space $\mathcal{P}_N$.</em>
+  </p>
+
+  <p>&nbsp; <b>Solution:</b> since the zero vector in $\mathcal{P}_N$ is the polynomial $0_P$ that has value $0$ for all $x$, we
+  have to solve the polynomial equation
+ <span class="equation"> $$c_0 + c_1 x + c_2 x^2 + \ldots + c_m x^m +
+  \ldots + c_N x^N \ = \ 0_P\,.$$</span>
+  In other words, we have to determine all values of $c_0,\, c_1,\,
+  c_2,\, \ldots,\, c_N$ such that
+  </p>
+
+</td>
+<td style="width: 475px; height: 200px;  padding-left: 0.5cm; padding-right: 0.5cm;
+  vertical-align: top;">
+<p>
+  <span class="equation">$$c_0 + c_1 x + c_2 x^2 + \ldots + c_m x^m +
+  \ldots + c_N x^N \ = \ 0 $$</span></p>
+  holds <b>for all</b> $x$. But by the Fundamental Theorem of Algebra a
+  polynomial of degree $N$ can have at most $N$ roots unless all its
+  coefficients are zero, <em>i.e.</em>,
+   <span class="equation"> $$ c_0 = c_1 = c_2 = \ldots = c_N =
+  0$$</span>holds.
+  Thus the monomials
+  $$1,\ \ x, \ \ x^2, \ \ \ldots,\ \ x^m,\ \ \ldots \ \ x^N, $$</span>
+ are linearly independent in $\mathcal{P}_N$.</p>
+  </td>
+</tr>
+</tbody>
+</table></p>
+<br>
+
+<p>&nbsp; &nbsp; Recall next the notion of Wronskian, </p>
+
+<p><table style="margin-left: auto; width: 775px; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm;
+  padding-top: 0.1cm; padding-right: 0.5cm; padding-bottom: 0.1cm; color: rgb(0, 51, 153);
+ background: rgb(224,240,255);">
+</p>&nbsp; &nbsp; <b>Definition 2:</b> <em> For $U \subseteq \mathbb{R},$ the </em><b>Wronskian</b><em> associated with functions 
+ $$ f_1(x), \quad f_2(x), \quad \ldots \quad f_n(x) \in C^{\ (n-1)}(U)$$
+ is the determinant function
+  $${\bf W}(x) \ = \ \left|\matrix{f_1(x) & f_2(x) & f_3(x) & \cdots &
+  f_n(x) \cr
+  f_1'(x) & f_2'(x) & f_3'(x) & \cdots & f_n'(x) \cr
+  f_1''(x) & f_2''(x) & f_3''(x) & \cdots & f_n''(x) \cr
+  \vdots & \vdots & \vdots & \ddots & \vdots \cr
+  f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & f_3^{(n-1)}(x) & \cdots &
+  f_n^{(n-1)}(x)}\right|, \qquad x \in U.$$</em>
+  </p>
+</td>
+</tr>
+</tbody>
+</table></p>
+
+<p>&nbsp; &nbsp; Many differential equation courses restrict
+discussion to the $2 \times 2$ case
+<span class="equation">$${\bf W}(x) \ = \ \left|\matrix{f_1(x) &
+f_2(x)\cr
+f_1'(x) & f_2'(x)}\right| \ = \ f_1(x)f_2'(x) - f_1'(x)
+f_2(x)\,,$$</span>
+but the general $n \times n$ case is conceptually the same and only
+slightly more complicated algebraically. A basic result for general $n$ is</p>
+
+<p><table style="margin-left: auto; width: 775px; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm;
+  padding-top: 0.1cm; padding-right: 0.5cm; padding-bottom: 0.1cm; color: rgb(0, 51, 153);
+ background: rgb(224,240,255);">
+</p>&nbsp; &nbsp; <b>Theorem 3:</b> <em> Let $U \subseteq \mathbb{R},$ let $V \subseteq C^{\ (n-1)}(U)$ be a subspace, and let $f_1,\, f_2, \,  \ldots, \, f_n \in V.$ Then $f_1,\, f_2, \,  \ldots, \, f_n$ are linearly independent in $V$ if the associated Wronskian ${\bf W}(x)$ is non-zero at some $x_0 \in U,$ i.e., ${\bf W}(x_0) \ne 0$ for some $x_0.$
+  </p>
+</td>
+</tr>
+</tbody>
+</table></p>
+
+<br><br>
+
+<div class="sectionhead">2. Basis</div>
+
+<p> &nbsp; &nbsp; Now let's combine the ideas of <em>spanning</em> and
+<em>linear independence</em> to arrive at: </p>
+
+<p>
+<table style="margin-left: auto; width: 700px; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm; color: rgb(0, 51, 153);
+ background: rgb(224,240,255);">
+</p>&nbsp; &nbsp; <b>Definition 3:</b> <em> A subset ${\cal B} \,=\, \{{\bf v}_1,\, {\bf v}_2,
+  \dots , \, {\bf v}_p\}$ of a real vector space $V$ is said to be
+  a </em><b>Basis</b><em> for $V$ when
+  <p>&nbsp; &nbsp; &nbsp; &nbsp;<img src="bluedot.gif" width="15"
+  height="15">&nbsp; &nbsp;
+  $V \ = \ \text{Span}\big\{{\bf v}_1,\, {\bf v}_2,
+  \dots , \, {\bf v}_p\big\}\,,$</p>
+
+  <p>&nbsp; &nbsp; &nbsp; &nbsp;<img src="bluedot.gif" width="15"
+  height="15">&nbsp; &nbsp; the set
+  $\big\{{\bf v}_1,\, {\bf v}_2,
+  \dots , \, {\bf v}_p\big\}$ is linearly independent</em>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+
+<p>&nbsp; &nbsp; Bases are fundamental in all areas
+of linear algebra and linear analysis, including matrix algebra,
+Euclidean geometry, statistical analysis, solutions to linear
+differential and partial differential equations, linear boundary value
+problems, Fourier analysis, signal and image processing, data
+compression and control
+systems. As we shall see, basis vectors are the <em>basic building
+blocks</em> for representing solutions of a linear system whatever
+form that system may take.
+</p>
+
+<p>&nbsp; &nbsp; Since  $V\ = \ \text{Span}\big\{{\bf v}_1,\, {\bf v}_2,
+  \dots , \, {\bf v}_p\big\}\,,$ every ${\bf x}$ in $V$ can be written as
+  a linear combination
+<span class="equation">$${\bf x} \ =  \ c_1 {\bf v}_1\, +\, c_2{\bf v}_2\, +\,
+  \ldots\, +\, c_p {\bf v}_p$$</span>
+for at least one set of real numbers $c_1,\, c_2, \dots,\, c_p$. But if
+  $d_1, \, d_2,\, \ldots ,\, d_p$ is another choice of real numbers such
+  that
+<span class="equation">$${\bf x} \ =  \ d_1 {\bf v}_1\, +\, d_2{\bf v}_2\, +\, \ldots\, +\, d_p {\bf v}_p\,,$$</span>
+then
+<span class="equation">$${\bf x} - {\bf x} \ =  \ {\bf 0}_V \ = \ (c_1 - d_1) {\bf v}_1 + (c_2
+  - d_2) {\bf v}_2 + \dots + (c_p - d_p) {\bf v}_p\,.$$</span>
+The linear independence of $\{{\bf v}_1,\, {\bf v}_2,
+  \dots , \, {\bf v}_p\}$ then ensures that
+<span class="equation">$$c_1 - d_1 \ = \ 0\,, \quad c_2 - d_2 \ = \
+  0\,, \quad  \dots\,,
+  \quad c_p - d_p \ = \ 0\,, \qquad i.e., \quad c_1 \,=\, d_1,\quad c_2
+  \,=\, d_2,\quad \ldots, \quad c_p \,=\, d_p\,.$$</span>
+Consequently,</p>
+
+
+
+<p><table style="margin-left: auto; width: 700px; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm;
+  padding-top: 0.5cm; padding-right: 0.5cm; padding-bottom: 0.5cm; color: rgb(0, 51, 153);
+ background: rgb(224,240,255);">
+&nbsp; &nbsp; <b>Basis Property:</b> <em>When a set ${\cal B} \,=\, \big\{{\bf
+  v}_1,\, {\bf v}_2, \dots , \, {\bf v}_n\big\}$ is a
+</em><b>Basis</b><em> for a vector space $V$, then each ${\bf x}$ in $V$ has a
+</em><b>unique</b><em> representation
+  $${\bf x} \ =  \ c_1 {\bf v}_1 + c_2{\bf v}_2 + \ldots + c_p {\bf
+  v}_p$$
+  in terms of the basis vectors</em>.
+</td>
+</tr>
+</tbody>
+</table></p>
+
+<p> &nbsp; &nbsp; Intuition tells us that ${\mathbb R}^3$ is
+$3$-dimensional, but might it have a basis containing, say, <b>four</b>
+vectors?; or could ${\mathbb R}^n$ have a basis other than the standard
+basis containing $n-1$ or $n+1$ vectors? An important theorem says NO:
+</p>
+
+<p><table style="margin-left: auto; width: 800px; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm;
+  padding-top: 0.3cm; padding-right: 0.5cm; padding-bottom: 0.1cm; color: rgb(0, 51, 153);
+ background: rgb(224,240,255);">
+&nbsp; &nbsp; <b>Theorem 4:</b> <em> If $\big\{ {\bf v}_1, \ {\bf v}_2,
+  \ \ldots, \ {\bf v}_n \big \}$ is a basis for a real vector space
+  $V$, then every other basis of $V$ also contains exactly $n$ elements.</p>
+</td>
+</tr>
+</tbody>
+</table></p>
+
+<p> &nbsp; &nbsp; We can now define the dimension of a vector space.</p>
+
+<p>
+<table style="margin-left: auto; width: 700px; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkblue" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: left; padding-left: 0.5cm; padding-right: 0.5cm; color: rgb(0, 51, 153);
+ background: rgb(224,240,255);">
+</p>&nbsp; &nbsp; <b>Definition 4:</b> <em> If a vector space $V$ has a basis of $n$ elements, then the <b>DIMENSION</b> of $V$ is $n.$ We may write $\textrm{dim}(V) = n$ or $V \cong \mathbb{R}^n.$</em></p>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+
+<p>&nbsp; &nbsp; Theorem 4 ensures
+that dimension is well-defined. An
+infinite-dimensional space contains an infinite collection of linearly
+independent elements. For example, the vector space $\mathcal{P} \,=\, \bigcup_n
+\mathcal{P}_n$ is infinite-dimensional because no finite set of
+monomials can be a basis. On the other hand, the set of all bases of $\mathbb{R}^n$ can be characterized in a useful way:</p>
+
+<p><table style="margin-left: auto; width: 900px;margin-right: auto;
+  text-align: left;" border="3" bordercolor="lightgray" cellspacing="2" cellpadding="5"
+  ">
+<tbody>
+<tr>
+<td style="width: 450px; height: 200px; text-align: left;
+  vertical-align: top; padding-left: 0.5cm; padding-right: 0.5cm;">
+   <p> &nbsp; <b>Theorem: </b> <em> The vectors <span class="equation">${\bf b}_1,\ {\bf
+  b}_2,\ \dots, \ {\bf b}_n$</span> in ${\mathbb R}^n$ are a basis
+  for ${\mathbb R}^n$
+  if and only if the $n \times n$ matrix 
+ <span class="equation">$$A \ = \   \big[ {\bf b}_1\ \ {\bf b}_2 \ \
+  \cdots \ \ {\bf b}_n \big]$$</span>
+  having the basis vectors as columns is invertible</em>.</p>
+
+  <p>&nbsp; <b>Proof:</b> if $A$ is invertible, then $A {\bf x}\,=\,
+ {\bf 0}$, while ${\bf
+  x}\,=\, A^{-1}{\bf 0} \,=\, {\bf 0}$, so
+ <span class="equation"> $${\cal B} \ = \ \big\{ {\bf b}_1,\ \ {\bf
+  b}_2, \ \ \dots, \ \ {\bf b}_n\big\}$$ </span>
+  is a linearly independent set in ${\mathbb R}^n$.
+</p>
+
+  <p> &nbsp; &nbsp; On the other hand, if ${\bf
+  b}$ is any vector in ${\mathbb R}^n$, then the matrix equation
+  <span class="equation">$$A
+  {\bf x} \,=\, x_1 {\bf b}_1 + x_2 {\bf b}_2 + \dots + x_n{\bf b}_n \,=\,{\bf b}\,,$$</span> 
+</td>
+<td style="width: 450px; height: 200px;  padding-left: 0.5cm;
+  padding-right: 0.5cm; vertical-align: top;">
+  <p>&nbsp; always has a solution ${\bf x}\,=\,
+  A^{-1}{\bf b}$, so
+ <span class="equation"> $$\text{Span}\big\{ {\bf b}_1\ , \ {\bf b}_2 \ , \ \dots \ , \ {\bf
+  b}_n\big\}\ =  \ {\mathbb R}^n.$$</span>
+  Thus ${\cal B}$ is a basis for ${\mathbb R}^n$ when $A$ is invertible.
+  </p>
+
+  <p> &nbsp; &nbsp; Conversely, suppose
+  <span class="equation"> $${\cal B} \ = \ \big\{ {\bf b}_1,\ \ {\bf
+  b}_2, \ \ \dots, \ \ {\bf b}_n\big\}$$ </span>
+is a basis for ${\mathbb R}^n$ and $A$ is the $n \times n$ matrix
+<span class="equation">$$A \ = \   \big[ {\bf b}_1\ \ {\bf b}_2 \ \
+  \cdots \ \ {\bf b}_n \big].$$</span>
+  Since ${\cal B}$ is linearly independent, the matrix $A$ will row reduce to the identity matrix $I_n,$ thus we will be able to compute the inverse for $A.$
+  </td>
+</tr>
+</tbody>
+</table></p>
+<br>
+
+<div class="sectionhead">3. Examples</div>
+
+<p class="tabbed">
+Every example in the lesson on SPAN is in fact expressed as the span of a basis. We list the respective results on dimension for those examples here.
+</p>
+
+<b>Note: When giving a basis, ORDER MATTERS!</b><br>
+
+<ul>
+<li>
+<b>$n$-space, $\mathbb{R}^n$</b><br>
+The standard basis of $\mathbb{R}^n$ is $\{e_1, e_2, \dots, e_n \}$ and 
+$\textrm{dim}(\mathbb{R}^n) = n$
+</li>
+<li><b>Matrices:</b><br>
+<ul class="inner">
+<li>
+The standard basis of $M_{2 \times 3}(\mathbb{R})$ is
+$$\left\{ \
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 1 & 0 \\ 0 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 1 \\ 0 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 0 \\ 1 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 0 \\ 0 & 1 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 0 \\ 0 & 0 & 1 \\ \end{array} \right] \
+\right\}$$
+and $\textrm{dim}(M_{2 \times 3}(\mathbb{R})) = 6.$
+</li>
+<li>
+The standard basis of $M_{2}(\mathbb{R})$ is
+$$\left\{ \
+\left[ \begin{array}{cc} 1 & 0 \\ 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{cc} 0 & 1 \\ 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{cc} 0 & 0 \\ 1 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{cc} 0 & 0 \\ 0 & 1 \\ \end{array} \right] \
+\right\}$$
+and $\textrm{dim}(M_{2}(\mathbb{R})) = 4.$
+</li>
+<li>
+The standard basis of $D_3$ is
+$$\left\{ \ 
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{ccc} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \\ \end{array} \right] \
+\right\}$$
+and $\textrm{dim}(D_3) = 3.$
+</li>
+<li>
+The standard basis of $UT_2$ is
+$$\left\{ \ 
+\left[ \begin{array}{cc} 1 & 0 \\ 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{cc} 0 & 1 \\ 0 & 0 \\ \end{array} \right] , \
+\left[ \begin{array}{cc} 0 & 0 \\ 0 & 1 \\ \end{array} \right] \
+\right\}$$
+and $\textrm{dim}(UT_2) = 3.$
+</li>
+</ul>
+</li>
+<li><b>Polynomials:</b><br>
+The standard basis of $\mathcal{P}_n$ is 
+$$\{1, t, t^2, \dots, t^n\}$$
+and $\textrm{dim}(\mathcal{P}_n) = n+1.$<br>
+(Remember, order matters.)
+<li><b>Complex Numbers, $\mathbb{C}:$</b><br>
+The standard basis of $\mathbb{C}$ is
+$$ \{ 1 , i \}$$
+and $\textrm{dim}(\mathbb{C}) = 2$.
+</li>
+<li><b>ODE's</b><br>
+If $L[y]=0$ is a homogeneous ODE of order $n$, then 
+$\textrm{dim}(V_L) = n,$ although we do not yet know how to define
+the standard basis of $V_L$. For now, we know that any pair of
+fundamental solutions to a second order, homogeneous ODE forms
+a basis for $V_L.$ For example, both 
+$$ \{ e^t, e^{-t} \} \quad \textrm{ and } \quad \{ \cosh (t) , \sinh(t) \}$$
+are bases of $V_L$ when $L = y^{\ \prime \prime} - y$.
+</li>
+<li><b>Systems</b><br>
+If $A \in M_n(\mathbb{R})$, then $\textrm{dim}(V_A) = n.$
+</li>
+<li><b>Kernels</b><br>
+If $A \in M_{r \times c}(\mathbb{R})$, we will define the standard basis
+of the kernel of $A,$ $\textrm{ker}(A) = \textrm{Nul}(A),$ as follows:<br>
+Put $A$ in RREF, then put the solutions in paramatric form. Then you 
+will have the general solution in the following form:
+$$\textrm{Nul}(A) = \left\{ \ r_1 \vec{v}_1 + \cdots 
++ r_k \vec{v}_k \ \middle| \ r_1, \dots, r_k \in \mathbb{R} \ \right\}$$
+We define the standard basis of $\textrm{Nul}(A)$ to be 
+$$\left\{ \vec{v}_1 , \dots , \vec{v}_k \right\}$$
+and then $\textrm{dim}(\textrm{Nul}(A)) = k.$<br>
+For example, if 
+$$\textrm{RREF}(A) = \left[ \begin{array}{rrr}
+1 & -1 & 3 \\ 0 & 0 & 0 \\ \end{array} \right]$$
+then the standard basis of $\textrm{Nul}(A)$ is
+$$\left\{ \ \left[ \begin{array}{r} 1 \\ 1 \\ 0 \\ \end{array} \right] ,
+\left[ \begin{array}{r} -3 \\ 0 \\ 1 \\ \end{array} \right] \
+\right\}$$
+and $\textrm{dim}(\textrm{Nul}(A)) = 2.$
+</li>
+ 
+</ul>
+
+<br><br><br><br><br><br><br><br>
+</body>
+</html>

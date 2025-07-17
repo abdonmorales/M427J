@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="LinAlg.css">
+<title>LA2HW for DE</title>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage"});</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script> 
+</head>
+<body>
+
+<br>
+<h1>Homework for Solving Linear Systems</h1>
+<br>
+
+<h4>1. Solving Linear Systems</h4>
+
+Know how to
+<ul class="inner">
+<li>Compute the Reduced Row Echelon Form (RREF) of a matrix.</li>
+<li>Use RREF to solve a linear system.</li>
+<li>Express the solution set in parametric form.</li>
+<li>Compute the rank of a matrix.</li>
+</ul>
+
+<ul class="blueul">
+<li>
+Examples: 
+	<ul class="inner">
+		<li>From <a href="http://linear.ups.edu/html/section-RREF.html" 
+			target="_blank">
+			http://linear.ups.edu/html/section-RREF.html</a>,
+			read Example RREF, Example NRREF, Example SAB, Example SAA, 
+			Example SAE, and Sage RREF.
+			Our solutions will be in parametric form. For example, the 
+			solution to Example SAA in parametric form is
+			$${\bf x} \ = \ \left[ \begin{array}{c} 
+			3-x_3 \\ 2+x_3 \\ x_3 \\
+			\end{array} \right] \ = \ \left[\begin{array}{c} 3 \\ 2 \\ 0 \\
+			\end{array}\right] + x_3 \, \left[\begin{array}{c} -1 \\ 1 \\ 1 \\
+			\end{array}\right].$$
+		</li>
+		<li>The following is a system of six equations in nine variables. Read through until
+		they give the parametric form of the solution: <a href="
+		http://linear.ups.edu/html/archetype-J.html
+		" target="_blank">
+		http://linear.ups.edu/html/archetype-J.html</a>.
+		</li>
+	</ul>
+</li>
+<li>
+Homework: 
+	<ul class="inner">
+		<li>From <a href="
+		http://linear.ups.edu/html/section-SSLE.html
+		" target="_blank">
+		http://linear.ups.edu/html/section-SSLE.html</a>, 
+		do Exercises SSLE.C30, SSLE.C31, SSLE.C32, SSLE.C33, and 
+		SSLE.C34. Put your solutions in parametric form.
+		</li>
+		<li>From <a href="
+		http://linear.ups.edu/html/section-RREF.html
+		" target="_blank">
+		http://linear.ups.edu/html/section-RREF.html</a>, 
+		do Exercises RREF.C10, RREF.C11, RREF.C12, RREF.C13, RREF.C14, RREF.C15, RREF.C16,
+		RREF.C17, RREF.C18, RREF.C19, RREF.C30, RREF.C31, RREF.C32, RREF.C33, RREF.M45, and
+		RREF.M50. Put your solutions in parametric form.
+		<br>
+		The parametric form of the solution for several of the above Exercises is given below:
+		<table style="text-align: center;">
+		<tbody>
+		<tr><td width="300px">RREF.C12</td><td width="300px">RREF.C14</td>
+		<td width="200px">RREF.C15</td></tr>
+		<tr>
+		<td style="border: 1px solid black;">
+		<span class="equation">  $${\bf x} \ = \ \left[\begin{array}{cc} 2 \cr 0 \cr -6 \cr 0 
+		\end{array}\right] + x_2 \, \left[\begin{array}{cc} -2 \cr 1 \cr 0 \cr 0 
+		\end{array}\right] + x_4 \, \left[\begin{array}{cc} 4 \cr 0 \cr -3 \cr 1 
+		\end{array}\right]$$</span>
+		</td>
+		<td style="border: 1px solid black;">
+		<span class="equation">  $${\bf x} \ = \ \left[\begin{array}{cc} 3 \cr -2 \cr 0 \cr 0 
+		\end{array}\right] + x_3 \, \left[\begin{array}{cc} -2 \cr -3 \cr 1 \cr 0 
+		\end{array}\right] + x_4 \, \left[\begin{array}{cc} -1 \cr 4 \cr 0 \cr 1 
+		\end{array}\right]$$</span>
+		</td>
+		<td style="border: 1px solid black;">
+		<span class="equation">  $${\bf x} \ = \ \left[\begin{array}{cc} 3 \cr -5 \cr 7 \cr 0 
+		\end{array}\right] + x_4 \, \left[\begin{array}{cc} -2 \cr 3 \cr -4 \cr 1 
+		\end{array}\right]$$</span>
+		</td>
+		</tr></tbody></table>
+		</li>
+		<li>From <a href="http://linear.ups.edu/html/section-TSS.html" 
+		target="_blank">http://linear.ups.edu/html/section-TSS.html</a>, 
+		do Exercises TSS.C21, TSS.C22, TSS.C23, TSS.C24, TSS.C25, TSS.C26, TSS.C27, and
+		TSS.C28. Put your solutions in parametric form.
+		</li>				
+		<li>From <a href="
+		http://linear.ups.edu/html/section-VO.html
+		" target="_blank">
+		http://linear.ups.edu/html/section-VO.html</a>, 
+		do Exercise VO.C15.
+		</li>
+		<li>From <a href="
+		http://linear.ups.edu/html/section-MO.html
+		" target="_blank">
+		http://linear.ups.edu/html/section-MO.html</a>, 
+		do Exercise MO.C14.
+		</li>
+	</ul>
+<li>Use the following example and create your own problems:
+</li>
+</ul>
+<b><span style="color: red;">Note:</span> 
+You can use the code below to solve any linear system you see this semester!</b>
+<div class="sage"><script type="text/x-sage">
+coeff = matrix(QQ, [[-7, -6, -12],[5,   5,   7],[1,   0,   4]])
+const = vector(QQ, [-33, 24, 5])
+aug = coeff.augment(const)
+aug.rref()
+</script></div>
+
+<h4>2. Homogeneous Systems</h4>
+
+Know how to
+<ul class="inner">
+<li>Identify a homogeneous system.</li>
+<li>Use RREF$(A)$ to solve a homogeneous system.</li>
+<li>Express the solution set in parametric form.</li>
+</ul>
+
+<ul class="blueul">
+<li>
+Examples: 
+	<ul class="inner">
+		<li>From <a href="
+		http://linear.ups.edu/html/section-HSE.html
+		" target="_blank">
+		http://linear.ups.edu/html/section-HSE.html</a>, 
+		read Example HUSAB, Example HISAA, and Example HISAD.
+		</li>
+	</ul>
+</li>
+<li>
+Homework: 
+	<ul class="inner">
+		<li>From <a href="
+		http://linear.ups.edu/html/section-HSE.html
+		" target="_blank">
+		http://linear.ups.edu/html/section-HSE.html</a>, 
+		do Exercises HSE.C21, HSE.C22, HSE.C23, HSE.C25, HSE.C26, and 
+		HSE.C27. Put your solutions in parametric form.
+		</li>
+		<li>Do <a href="LA2suppHW1.pdf" target="_blank">LA2suppHW1.pdf</a>.
+		</li>
+	</ul>
+</li>
+</ul>
+
+<br><br><br>
+
+</body>
+</html>

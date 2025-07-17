@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>.equation { color: rgb(0, 51, 153); }</style>
+<style>.new { color: red; font: bold; font-size: 20px; }</style>
+<style>
+div {
+    margin: 20px 30px;    
+    padding: 20px;
+    text-align: left;
+	width: 600px;
+}
+div.LA {
+	border: 4px solid dodgerblue;
+}
+div.FO {
+	border: 4px solid forestgreen;
+}
+div.SO {
+	border: 4px solid saddlebrown;
+}
+div.LS {
+	border: 4px solid darkorchid;
+}
+div.HE {
+	border: 4px solid red;
+}
+table.calendar {
+	margin: 20px 30px;    
+	border: 2px solid black;
+	width: 1000px;
+}
+table.calendar td {
+    border: 1px solid #ddd;
+}
+table.calendar th {
+	border: 1px solid #ddd;
+    text-align: center;
+}
+table.calendar td.holiday {
+	background-color: #ddd;
+	border: 0px;
+}
+table.calendar td.FO {
+	border: 2px solid forestgreen;
+}
+table.calendar td.SO {
+	border: 2px solid saddlebrown;
+}
+table.calendar td.LS {
+	border: 2px solid darkorchid;
+}
+table.calendar td.LA {
+	border: 2px solid dodgerblue;
+}
+table.calendar td.HE {
+	border: 2px solid red;
+}
+table.calendar td.Exam {
+	border: 2px solid black;
+    font-weight: bold;
+}
+table.calendar td.weeklyLA {
+	border: 1px solid #ddd;
+    text-align: center;
+    color: dodgerblue;
+    background-color: white;
+}
+table, td, th {    
+    text-align: left;
+    vertical-align: top;
+}
+th, td {
+    padding: 5px 10px;
+}
+td.resource {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+td.info {
+    border: 1px solid #ddd;
+}
+ul {
+	margin: 0px;
+	padding: 0px 15px;
+}
+a.calLA:link, a.calLA:visited {
+    background-color: white;
+    color: dodgerblue;
+    padding: 5px 15px;
+    text-decoration: none;
+    border: 1px solid white;    
+}
+a.calLA:hover, a.calLA:active {
+    background-color: #e6f2ff;
+    color: dodgerblue;
+    border: 1px solid dodgerblue;
+}
+a.calFO:link, a.calFO:visited {
+    background-color: white;
+    color: black;
+	padding: 5px 15px;
+    text-decoration: none;
+    border: 1px solid white;   
+}
+a.calFO:hover, a.calFO:active {
+    background-color: #d6f5d6;
+    color: black;
+    border: 1px solid forestgreen;    
+}
+a.calSO:link, a.calSO:visited {
+    background-color: white;
+    color: black;
+	padding: 5px 15px;
+    text-decoration: none;
+    border: 1px solid white;    
+}
+a.calSO:hover, a.calSO:active {
+    background-color: #f9e2d2;
+    color: black;
+    border: 1px solid saddlebrown;    
+}
+a.calLS:link, a.calLS:visited {
+    background-color: white;
+    color: black;
+	padding: 5px 15px;
+    text-decoration: none;
+    border: 1px solid white;    
+}
+a.calLS:hover, a.calLS:active {
+    background-color: #e1c1f0;
+    color: black;
+    border: 1px solid darkorchid;    
+}
+a.calHE:link, a.calHE:visited {
+    background-color: white;
+    color: black;
+	padding: 5px 15px;
+    text-decoration: none;
+    border: 1px solid white;    
+}
+a.calHE:hover, a.calHE:active {
+    background-color: #ffcccc;
+    color: black;
+    border: 1px solid red;    
+}
+a.cal:link, a.cal:visited {
+    background-color: white;
+    color: black;
+	padding: 5px 15px;
+    text-decoration: none;
+}
+a.cal:hover, a.cal:active {
+    background-color: #b3ffff;
+    color: black;
+}
+</style>
+<title>DE Lessons</title>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage"});</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>
+</head>
+<body style="font-family: Verdana, san serif; font-size: 95%; font-style: normal;
+	line-height: 180%; 
+	font-weight: 450; 
+	font-variant: normal;
+	color: #333">
+
+<table class="calendar">
+<tr>
+<th>Monday</th>
+<th>Tuesday</th>
+<th>Wednesday</th>
+<th>Thursday</th>
+<th>Friday</th>
+</tr>
+
+<tr>
+<td class="holiday">6/2<br>
+</td>
+<td class="holiday">6/3</td>
+<td class="holiday">6/4</td>
+<td class="holiday">6/5<br>No class </td>
+<td class="LS">6/6<br>
+<center>
+<a class="calLS" href="#SIR">
+SIR Model
+</a>
+</center>
+</td>
+</tr>
+
+<tr>
+<td class="FO">6/9<br>
+<center>
+<a class="calFO" href="#Br1s2">
+Braun 1.2
+</a>
+</center>
+</td>
+<td class="Exam">6/10<br>Quiz 1 Start 12 PM</td>
+<td class="FO">6/11<br>
+<center>
+<a class="calFO" href="#Br1s4">
+Braun 1.4
+</a>
+</center>
+</td>
+<td class="Exam">6/12<br>Quiz 1 Due 12 PM
+<br>Quiz 2 Start 12 PM
+</td>
+<td class="SO">6/13<br>
+<center>
+<a class="calSO" href="#Br2s1">
+Braun 2.1
+</a><br><br>
+<a class="calSO" href="#Br2s2">
+Braun 2.2
+</a><br><br>
+</center>
+</td>
+</tr>
+
+<tr><td colspan="5" class="weeklyLA">
+<a class="calLA" href="#LA1">
+Linear Algebra Lesson 1: Vectors and Matrices
+</a> (6/9 - 6/13)
+</td></tr>
+
+<tr>
+<td class="SO">6/16<br>
+<center>
+<a class="calSO" href="#Br2s2s1">
+Braun 2.2.1
+</a><br><br>
+<a class="calSO" href="#Br2s2s2">
+Braun 2.2.2
+</a><br><br>
+</center>
+</td>
+<td class="Exam">6/17<br>Quiz 2 Due 12 PM</td>
+<td class="SO">6/18<br>
+<center>
+<a class="calSO" href="#Br2s3">
+Braun 2.3
+</a>
+</center>
+</td>
+<td class="holiday">6/19<br>Quiz 3 Start 12 PM<br>No class</td>
+<td class="SO">6/20<br>
+<center>
+<a class="calSO" href="#Br2s5">
+Braun 2.5
+</a>
+</center>
+</td>
+</tr>
+
+<tr><td colspan="5" class="weeklyLA">
+<a class="calLA" href="#LA2">
+Linear Algebra Lesson 2: Solving Linear Systems
+</a> (6/16 - 6/20)
+</td></tr>
+
+<tr>
+<td class="SO">6/23<br>
+<center>
+<a class="calSO" href="#Br2s5">
+Braun 2.5
+</a>
+</center>
+</td>
+<td class="Exam">6/24<br>Quiz 3 Due 12 PM
+<br>Exam 1 Online Start 12 PM
+</td>
+<td class="Exam">6/25<br>Exam 1 In Class</td>
+<td class="Exam">6/26<br>Exam 1 Online Due 12 PM
+<br>Quiz 4 Start 12 PM
+</td>
+<td class="LS">6/27<br>
+<center>
+<a class="calLS" href="#Br3s1">
+Braun 3.1
+</a>
+</center>
+</td>
+</tr>
+
+<tr><td colspan="5" class="weeklyLA">
+<a class="calLA" href="#LA3">
+Linear Algebra Lesson 3: Matrix Inverses
+</a> (6/23 - 6/27)
+</td></tr>
+
+<tr>
+<td class="holiday">6/30<br>
+No class
+</td>
+<td class="Exam">7/1<br>Quiz 4 Due 12 PM</td>
+<td class="LA">7/2<br>
+<center>
+<a class="calLA" href="#LA5">
+LinAlg 5
+</a><br><br>
+<a class="calLA" href="#LA6">
+LinAlg 6
+</a><br><br>
+</a>
+</center>
+</td>
+<td class="Exam">7/3<br>Quiz 5 Start 12 PM</td>
+<td class="holiday">7/4<br>
+No class</td></tr>
+
+<tr><td colspan="5" class="weeklyLA">
+<a class="calLA" href="#LA4">
+Linear Algebra Lesson 4: Determinants
+</a> (6/30 - 7/4)
+</td></tr>
+
+<tr>
+<td class="LA">7/7<br>
+<center>
+<a class="calLA" href="#LA7">
+LinAlg 7
+</a>
+</center>
+</td>
+<td class="Exam">7/8<br>Quiz 5 Due 12 PM
+<br>Exam 2 Online Start 12 PM
+</td>
+<td class="Exam">7/9<br>Exam 2 In Class</td>
+<td class="Exam">7/10<br>Exam 2 Online Due 12 PM
+<br>Quiz 6 Start 12 PM
+</td>
+<td class="LA">7/11<br>
+<center>
+<a class="calLA" href="#LA8">
+LinAlg 8
+</a>
+</center>
+</td>
+</tr>
+
+<tr>
+<td class="LS">7/14<br>
+<center>
+<a class="calLS" href="#Br3s8">
+Braun 3.8
+</a>
+</center>
+</td>
+<td class="Exam">7/15<br>Quiz 6 Due 12 PM</td>
+<td class="LS">7/16<br>
+<center>
+<a class="calLS" href="#Br3s9">
+Braun 3.9
+</a>
+</center>
+</td>
+<td class="Exam">7/17<br>Quiz 7 Start 12 PM</td>
+<td class="LS">7/18<br>
+<center>
+<a class="calLS" href="#Br3s10">
+Braun 3.10
+</a><br><br>
+<a class="calLS" href="#Br3s11">
+Braun 3.11
+</a><br><br>
+</center>
+</td>
+</tr>
+
+<tr>
+<td class="LS">7/21<br>
+<center>
+<a class="calLS" href="#Br4s7">
+Braun 4.7
+</a>
+</center>
+</td>
+<td class="Exam">7/22<br>Quiz 7 Due 12 PM</td>
+<td class="LS">7/23<br>
+<center>
+<a class="calLS" href="#Br4s7">
+Braun 4.7
+</a>
+</center>
+</td>
+<td class="Exam">7/24<br>Quiz 8 Start 12 PM</td>
+<td class="LS">7/25<br>
+<center>
+<a class="calLS" href="#Br4s10">
+Braun 4.10
+</a>
+</center>
+</td>
+</tr>
+
+<tr>
+<td class="LS">7/28<br>
+<center>
+<a class="calLS" href="#Br4s10">
+Braun 4.10
+</a>
+</center>
+</td>
+<td class="Exam">7/29<br>Quiz 8 Due 12 PM
+<br>Exam 3 Online Start 12 PM
+</td>
+<td class="Exam">7/30<br>Exam 3 In Class</td>
+<td class="Exam">7/31<br>Exam 3 Online Due 12 PM
+<br>Quiz 9 Start 12 PM
+</td>
+<td class="HE">8/1<br>
+<center>
+<a class="calHE" href="#Br5s1">
+Braun Ch. 5
+</a>
+</center>
+</td>
+</tr>
+
+<tr>
+<td class="HE">8/4<br>
+<center>
+<a class="calHE" href="#Br5s1">
+Braun Ch. 5
+</a>
+</center>
+</td>
+<td class="Exam">8/5<br>Quiz 9 Due 12 PM
+</td>
+<td class="HE">8/6<br>
+<center>
+<a class="calHE" href="#Br5s1">
+Braun Ch. 5
+</a>
+</center>
+</td>
+<td class="Exam">8/7<br>Quiz 10 Start 12 PM</td>
+<td class="HE">8/8<br><center>
+<a class="calHE" href="#Br5s1">
+Braun Ch. 5
+</a>
+</center>
+</td>
+</tr>
+
+<tr>
+<td class="HE">8/11<br>
+<center>
+<a class="calHE" href="#Br5s1">
+Braun Ch. 5
+</a>
+</center>
+</td>
+<td class="Exam">8/12<br>Quiz 10 Due 12 PM
+<br>Quiz 11 Start 12 PM
+</td>
+<td class="HE">8/13<br>
+<center>
+<a class="calHE" href="#Br5s1">
+Braun Ch. 5
+</a>
+</center>
+</td>
+<td class="Exam">8/14<br>Quiz 11 Due 12 PM</td>
+<td class="Exam">8/15<br>Review
+</td>
+</tr>
+
+<tr><td colspan="5" class="Exam">
+Exam 4 Online Start 8/15 at 12 PM<br>
+Exam 4 Online Due when In Class Final Begins<br>
+Exam 4 In Class Final: Please see academic calendar</td></tr>
+</table>
+
+<!-- 
+
+LESSONS					LESSONS					LESSONS
+LESSONS					LESSONS					LESSONS
+LESSONS					LESSONS					LESSONS
+LESSONS					LESSONS					LESSONS
+
+-->
+
+<a name="SIR">
+<div class="LS">
+<center>SIR Model</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">
+<a href=
+"https://twjudson.github.io/odeproject-public/systems01.html#systems01-subsection-epidemics" 
+target="_blank">
+Judson, Section 2.1.3</a><br>
+</td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="SIRmodel.pdf" target="_blank">SIR model pdf</a></td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="LA1">
+<div class="LA">
+<center>Vectors and Matrices</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource"><a href="LinAlg1.html" target="_blank">LinAlg1.html</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info"><a href="LinAlg1HW.html" target="_blank">LinAlg1HW.html</a></td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br1s2">
+<div class="FO">
+<center>First Order Linear</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 1.2</td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 1.2: <br>
+Exercises 1, 3, 4, 6, 11, 15, 16, 20-23<br>
+Do not do the limits in 20-23</td>
+</tr>
+<tr>
+<td> </td>
+<td class="info">
+<a href=
+"https://twjudson.github.io/odeproject-public/firstlook05.html#exercises-firstlook05" 
+target="_blank">
+https://twjudson.github.io/odeproject-public/firstlook05.html#exercises-firstlook05</a><br>
+Exercises 1-20</td>
+</tr>
+<tr>
+<td>Challenge: </td>
+<td class="info">Braun, Section 1.2: <br>
+Exercises 17, 18, 19</td>
+</tr>
+<tr>
+<td>Applications: </td>
+<td class="info">
+<ul>
+<li>Braun, Section 1.3; Art Forgeries</li>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/firstlook01.html#firstlook01-subsection-exponential-growth" 
+target="_blank">
+Judson, 1.1.1</a>; Exponential Growth
+</li>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/firstlook03.html#firstlook03-subsection-rc-circuits" 
+target="_blank">
+Judson, 1.3.1 - 1.3.4</a>; RC Circuits and Slope Fields
+</li>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/firstlook05.html#firstlook05-subsection-mine-tailings" 
+target="_blank">
+Judson, 1.5.1 - 1.5.2</a>; Mine Tailings
+</li>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/firstlook05.html#firstlook05-subsection-mixing-models" 
+target="_blank">
+Judson, 1.5.3</a>; Mixing Models
+</li>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/firstlook05.html#firstlook05-subsection-finance-models" 
+target="_blank">
+Judson, 1.5.4</a>; Finance Models
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br1s4">
+<div class="FO">
+<center>Separable</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 1.4</td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 1.4: <br>
+Exercises 1-10</td>
+</tr>
+<tr>
+<td> </td>
+<td class="info">
+<a href=
+"https://twjudson.github.io/odeproject-public/firstlook02.html#firstlook02-exercises-" 
+target="_blank">
+https://twjudson.github.io/odeproject-public/firstlook02.html</a><br>
+Exercises 2-10, 12-20 (11 and 21 have an error)</td>
+</tr>
+<tr>
+<td>Challenge: </td>
+<td class="info">Braun, Section 1.4: <br>
+Exercises 11, 13-18</td>
+</tr>
+<tr>
+<td>Applications: </td>
+<td class="info">
+<ul>
+<li>Braun, Section 1.8(c); Orthogonal Trajectories
+<ul>
+<li><a href="https://www.desmos.com/calculator/3wl6g45eil" target="_blank">
+Braun 1.8 Example 2</a></li>
+<li><a href="https://www.desmos.com/calculator/tydemxzal5" target="_blank">
+Braun 1.8 #12</a></li>
+<li><a href="https://www.desmos.com/calculator/pdpwmjlspf" target="_blank">
+Braun 1.8 #14</a></li>
+</ul>
+</li>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/firstlook01.html#firstlook01-subsection-logistic-growth" 
+target="_blank">
+Judson, 1.1.2</a>; Logistic Growth
+</li>
+<li>
+<a href=
+"https://www.desmos.com/calculator/2t8f2oilys"
+target="_blank">
+Logistic Growth Curve</a>
+</li>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/firstlook02.html#firstlook02-subsection-newtons-law-cooling" 
+target="_blank">
+Judson, 1.2.2</a>; Newton's Law of Cooling
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</div>
+</a>
+
+
+<a name="LA2">
+<div class="LA">
+<center>Solving Linear Systems</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource"><a href="LinAlg2.html" target="_blank">LinAlg2.html</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info"><a href="LinAlg2HW.html" target="_blank">LinAlg2HW.html</a></td>
+</tr>
+<tr>
+<td> </td>
+<td class="info"><a href="https://web.ma.utexas.edu/users/jmeth/LSPG/LSPG.html" 
+target="_blank">LSPG.html</a></td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br2s1">
+<div class="SO">
+<center>Second Order Linear</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 2.1</td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 2.1: <br>
+Exercises 1-9</td>
+</tr>
+<tr>
+<td>Challenge: </td>
+<td class="info">Braun, Section 2.1: <br>
+Exercises 10-19</td>
+</tr>
+<tr>
+<td>Applications: </td>
+<td class="info">
+<ul>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/secondorder01.html#secondorder01-subsection-rlc-circuit" 
+target="_blank">
+Judson, 4.1.1</a>; RLC Circuit
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br2s2">
+<div class="SO">
+<center>Distinct Real Roots</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 2.2</td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 2.2: <br>
+Exercises 1-8 (Note Braun's remark for problems 3 and 5)</td>
+</tr>
+<tr>
+<td> </td>
+<td class="info">
+<a href=
+"https://twjudson.github.io/odeproject-public/firstlook01.html#firstlook01-exercises-find-solutions" 
+target="_blank">
+https://twjudson.github.io/odeproject-public/firstlook01.html#firstlook01-exercises-find-solutions</a><br>
+Exercises 12, 13</td>
+</tr>
+<tr>
+<td>Challenge: </td>
+<td class="info">Braun, Section 2.2: <br>
+Exercises 9-12</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="LA3">
+<div class="LA">
+<center>Matrix Inverses</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource"><a href="LinAlg3.html" target="_blank">LinAlg3.html</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info"><a href="LinAlg3HW.html" target="_blank">LinAlg3HW.html</a></td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br2s2s1">
+<div class="SO">
+<center>Complex Roots</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 2.2.1</td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 2.2.1: <br>
+Exercises 1-6, 8-10</td>
+</tr>
+<tr>
+<td>Challenge: </td>
+<td class="info">Braun, Section 2.2.1: <br>
+Exercises 12-19</td>
+</tr>
+<tr>
+<td>Applications: </td>
+<td class="info">
+<ul>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/systems03.html#systems03-subsection-duffing" 
+target="_blank">
+Judson, 2.3.1</a>; Crane's and Duffing's Equation
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br2s2s2">
+<div class="SO">
+<center>Repeated Roots</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 2.2.2</td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 2.2.2: <br>
+Exercises 1-7</td>
+</tr>
+<tr>
+<td> </td>
+<td class="info">
+<a href=
+"https://twjudson.github.io/odeproject-public/secondorder01.html#secondorder01-exercises" 
+target="_blank">
+https://twjudson.github.io/odeproject-public/secondorder01.html#secondorder01-exercises</a><br>
+Exercises 1-20</td>
+</tr>
+<tr>
+<td>Challenge: </td>
+<td class="info">Braun, Section 2.2.2: <br>
+Exercises 8-20</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br2s3">
+<div class="SO">
+<center>Second Order Nonhomogeneous</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 2.3</td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 2.3: <br>
+Exercises 1-3</td>
+</tr>
+<tr>
+<td>Challenge: </td>
+<td class="info">Braun, Section 2.3: <br>
+Exercises 4 and 5</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="LA4">
+<div class="LA">
+<center>Determinants</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource"><a href="LinAlg4.html" target="_blank">LinAlg4.html</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info"><a href="LinAlg4HW.html" target="_blank">LinAlg4HW.html</a></td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br2s5">
+<div class="SO">
+<center>Judicious Guessing</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 2.5</td>
+</tr>
+<tr>
+<td> </td>
+<td class="info">
+<a href="JudGuess.pdf" target="_blank">JudGuess.pdf</a>
+</td>
+</tr>
+<tr>
+<td> </td>
+<td class="info">
+<a href=
+"https://twjudson.github.io/odeproject-public/secondorder02.html#secondorder02-subsection-undetermined-coefficients" 
+target="_blank">
+Judson: Undetermined Coefficients</a>
+</td>
+</tr>
+<tr>
+<td> </td>
+<td class="info">
+<a href=
+"https://twjudson.github.io/odeproject-public/secondorder02.html#secondorder02-subsection-strategy" 
+target="_blank">
+Judson: Strategy</a>
+</td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 2.5: <br>
+Exercises 1-14</td>
+</tr>
+<tr>
+<td> </td>
+<td class="info">
+<a href=
+"https://twjudson.github.io/odeproject-public/secondorder02.html#secondorder02-exercises" 
+target="_blank">
+https://twjudson.github.io/odeproject-public/secondorder02.html</a><br>
+Exercises 1-24</td>
+</tr>
+<tr>
+<td>Challenge: </td>
+<td class="info">Braun, Section 2.5: <br>
+Exercises 15, 16, 18</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Oscillators">
+<div class="SO">
+<center>Harmonic Oscillators</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource"><a href="Oscillators.html" target="_blank">Oscillators.html</a></td>
+</tr>
+<tr>
+<td> </td>
+<td class="info">
+<a href=
+"https://twjudson.github.io/odeproject-public/firstlook01.html#firstlook01-subsection-spring-mass" 
+target="_blank">
+Judson: Spring-Mass Model</a>
+</td>
+</tr>
+<tr>
+<td> </td>
+<td class="info">
+<a href=
+"https://twjudson.github.io/odeproject-public/systems04.html#systems04-subsection-harmonic-oscillator" 
+target="_blank">
+Judson: Oscillators with Sage</a>
+</td>
+</tr>
+<tr>
+<td>Applications: </td>
+<td class="info">
+<ul>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/secondorder01.html#secondorder01-subsection-rlc-circuit" 
+target="_blank">
+Judson, 4.1.1</a>; RLC Circuits
+</li>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/secondorder04.html#secondorder04-subsection-resonance" 
+target="_blank">
+Judson, 4.4.1</a>; Resonance and Architecture
+</li>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/secondorder04.html#secondorder04-subsection-beats" 
+target="_blank">
+Judson, 4.4.2</a>; Beats
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br3s1">
+<div class="LS">
+<center>Linear Systems</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 3.1</td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="PesticideExample.pdf" target="_blank">Pesticide Example pdf</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 3.1: <br>
+Exercises 4-9</td>
+</tr>
+<tr>
+<td>Applications: </td>
+<td class="info">
+<ul>
+<li>
+<a href=
+"https://twjudson.github.io/odeproject-public/linear02.html#linear02-subsection-planar-systems" 
+target="_blank">
+Judson, 3.2.1</a>; Mixing Problem
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="LA5">
+<div class="LA">
+<center>Vector Spaces</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource"><a href="LinAlg5.html" target="_blank">LinAlg5.html</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">
+Memorize Blue Boxes
+</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="LA6">
+<div class="LA">
+<center>Subspaces</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource"><a href="LinAlg6.html" target="_blank">LinAlg6.html</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info"><a href="LinAlg6HW.html" target="_blank">LinAlg6HW.html</a></td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="LA7">
+<div class="LA">
+<center>Span</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource"><a href="LinAlg7.html" target="_blank">LinAlg7.html</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info"><a href="LinAlg7HW.html" target="_blank">LinAlg7HW.html</a></td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="LA8">
+<div class="LA">
+<center>Basis</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource"><a href="LinAlg8.html" target="_blank">LinAlg8.html</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info"><a href="LinAlg8HW.html" target="_blank">LinAlg8HW.html</a></td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br3s8">
+<div class="LS">
+<center>Real Eigenvalues</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 3.8</td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="RealEigenNumber3.pdf" target="_blank">Solution to number 3</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 3.8: <br>
+Exercises 1-12 <br>
+Hint for 6: p(&lambda;)=&lambda;<sup>4</sup>-64 &lambda;<sup>3</sup></td>
+</tr>
+<tr>
+<td>Challenge: </td>
+<td class="info">Braun, Section 3.8: <br>
+Exercises 14-21</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br3s9">
+<div class="LS">
+<center>Complex Eigenvalues</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 3.9</td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 3.9: <br>
+Exercises 1, 5, 6
+</td>
+</tr>
+<tr>
+<td> </td>
+<td class="info">
+<a href=
+"https://twjudson.github.io/odeproject-public/linear04.html#linear04-exercises"
+target="_blank">
+https://twjudson.github.io/odeproject-public/linear04.html#linear04-exercises</a><br>
+Exercises 1-16</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br3s10">
+<div class="LS">
+<center>Generalized Eigenvectors</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 3.10</td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">
+<a href=
+"https://twjudson.github.io/odeproject-public/linear05.html#exercises-linear05"
+target="_blank">
+https://twjudson.github.io/odeproject-public/linear05.html#exercises-linear05</a><br>
+Exercises 1-16</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br3s11">
+<div class="LS">
+<center>Matrix Exponential</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 3.11</td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="https://twjudson.github.io/odeproject-public/linear09.html#linear09" target="_blank">
+Judson, 3.9</a>; The Matrix Exponential
+</td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 3.11: <br>
+Exercises 1-7</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br4s7">
+<div class="LS">
+<center>Phase Plane</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 4.7</td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="https://web.ma.utexas.edu/users/jmeth/DESpring23/ch9_3-4.pdf" target="_blank">
+Phase Plane Portraits</a></td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="https://mathlets.org/mathlets/linear-phase-portraits-cursor-entry/" target="_blank">
+MIT Phase Plane Mathlet</a></td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="sagePhase.html" target="_blank">
+sagePhase.html</a></td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="https://www.geogebra.org/m/fYxXgbsU" target="_blank">
+geogebra</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 4.7: <br>
+Exercises 1-11</td>
+</tr>
+<tr>
+<td></td>
+<td class="info"><a href="https://twjudson.github.io/odeproject-public/linear07.html#linear07-exercises" target="_blank">
+Judson 3.7</a><br>
+Exercises 1-8</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br4s10">
+<div class="LS">
+<center>Nonlinear Systems</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Section 4.10</td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="nonlinear.pdf" target="_blank">
+nonlinear.pdf</a></td>
+</tr><tr>
+<td></td>
+<td class="resource"><a href="https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations" target="_blank">
+Lotka Volterra Equations</a></td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="https://twjudson.github.io/odeproject-public/systems02.html#systems02" target="_blank">
+Judson, 2.2</a>; The Geometry Of Systems
+</a></td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="https://twjudson.github.io/odeproject-public/nonlinear01.html#nonlinear01" target="_blank">
+Judson, 5.1</a>; Linearization of Nonlinear Systems
+</a></td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="sagePhase.html" target="_blank">
+sagePhase.html</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">Braun, Section 4.10: <br>
+Exercises 3, 4<br>
+Describe the phase plane at each equilibrium point.
+</td>
+</tr>
+<tr>
+<td></td>
+<td class="info"><a href="https://twjudson.github.io/odeproject-public/nonlinear01.html#nonlinear01-exercises" target="_blank">
+Judson, 5.1</a><br>
+Exercises 1-6<br>
+Describe the phase plane at each equilibrium point.
+</td>
+</tr>
+</table>
+</div>
+</a>
+
+<a name="Br5s1">
+<div class="HE">
+<center>PDEs and Heat Equation</center>
+<table>
+<tr>
+<td>Resource: </td>
+<td class="resource">Braun, Chapter 5</td>
+</tr>
+<tr>
+<td></td>
+<td class="resource"><a href="HeatEqtnShort.pdf" target="_blank">
+Heat Equation and Sine Series</a></td>
+</tr>
+<tr>
+<td>Homework: </td>
+<td class="info">See the pdf above </td>
+</tr>
+</table>
+</div>
+</a>
+
+<br><br><br><br>
+
+<br><br><br><br>
+
+<br><br><br><br>
+
+<br><br><br><br>
+
+<br><br><br><br>
+
+<br><br><br><br><br>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="LinAlg.css">
+<title>LA4 for DE</title>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>
+</head>
+<body>
+
+<br>
+<h1>Determinants</h1>
+<br>
+
+<div class="sectionhead">Determinants</div>
+
+<p class="tabbed">We need to define
+determinants and list a few of their principal properties.</p>
+
+<ul class="blueul">
+<li>For $2 \times 2$ matrices,
+$$\textrm{det} \left[ \begin{array}{cc} a & b \\ c & d \\ \end{array} \right]
+= a d - b c.$$
+</li>
+<li>For $3 \times 3$ matrices,
+$$\begin{align}
+\textrm{det} \left[ \begin{array}{ccc} a_{1} & a_{2} & a_{3} \\
+b_{1} & b_{2} & b_{3} \\ c_{1} & c_{2} & c_{3} \\
+\end{array} \right] & =
+a_1 \cdot \textrm{det} \left[ \begin{array}{cc}
+b_{2} & b_{3} \\c_{2} & c_{3} \\ \end{array} \right]
+-a_2 \cdot \textrm{det} \left[ \begin{array}{cc}
+b_{1} & b_{3} \\c_{1} & c_{3} \\ \end{array} \right]
++a_3 \cdot \textrm{det} \left[ \begin{array}{cc}
+b_{1} & b_{2} \\c_{1} & c_{2} \\ \end{array} \right] \\
+& = a_1 (b_2 c_3 - b_3 c_2) - a_2 (b_1 c_3 - b_3 c_1) + a_3 (b_1 c_2 - b_2 c_1) \\
+\end{align}
+$$
+</ul>
+
+<p>For example, 
+$$\textrm{det} \left[ \begin{array}{cc} 4  & 2 \\ 3 &  1 \\ \end{array} \right]
+\ = \ 4 \cdot 1 \, - \, 2 \cdot 3 \ = \ -2 \, ,$$
+and
+$$\textrm{det} \left[ \begin{array}{ccc} 1 & 2 & -3 \\ 4 & 1 & 1 \\ 
+1 & 2 & -1 \\ \end{array} \right]
+\ = \ 1 \cdot \textrm{det} \left[ \begin{array}{cc} 1 & 1 \\  2 & -1 \\
+\end{array} \right] 
+- 2 \cdot \textrm{det} \left[ \begin{array}{cc} 4 & 1 \\ 1 & -1 \\ 
+\end{array} \right] -3 \cdot \textrm{det} \left[ \begin{array}{cc} 
+4 & 1 \\ 1 & 2 \\ \end{array} \right] \ = \ -3
+-2(-5) -3(7) \ = \ -14\,. $$
+The formula for the general determinant depends on submatrices.
+</p>
+
+<div class="bluebox">
+Let $A = \left[ a_{i,\,j} \right] \in M_n(\mathbb{R}).$ For any pair 
+$(i,j)$ with $1 \leq i , j \leq n$ we define the <b>Submatrix</b>
+$$A_{i,\,j} \in M_{n-1}(\mathbb{R})$$
+be deleting the $i^{th}$ row and $j^{th}$ column of $A.$
+</div>
+
+<p>For example, if
+$$A = \left[ \begin{array}{ccc} 1 & 2 & -3 \\ 4 & 1 & 1 \\ 
+1 & 2 & -1 \\ \end{array} \right]$$
+then
+$$A_{1,1} = \left[ \begin{array}{cc} 1 & 1 \\  2 & -1 \\
+\end{array} \right]$$
+and
+$$A_{3,2} = \left[ \begin{array}{cc} 1 & -3 \\  4 & 1 \\
+\end{array} \right].$$
+</p>
+
+<div class="bluebox">
+For $A = \left[ a_{i,\,j} \right] \in M_n(\mathbb{R}),$ we define 
+the <b>Determinant</b> of $A$ as
+$$
+\textrm{det} (A) \ = \ a_{1,1} \textrm{det} (A_{1,1}) - a_{1,2}
+  \textrm{det} (A_{1,2}) + \ldots + 
+  (-1)^{n-1}a_{1,\, n} \textrm{det} (A_{1,\, n}).$$ 
+</div>
+
+<p>Let's see how this gives the determinant of a $4 \times 4:$
+$$\begin{align}
+\textrm{det} \left[ \begin{array}{cccc} 2 & 7 & -1 & 5 \\ 
+-3 & 4 & 2 & 0 \\ 3 & 1 & -2 & 4 \\ 0 & 2 & 5 & 3 \\
+\end{array} \right] \ = \ &
+2 \cdot \textrm{det} \left[ \begin{array}{ccc} 4 & 2 & 0 \\
+1 & -2 & 4 \\ 2 & 5 & 3 \\ \end{array} \right]
+- 7 \cdot \textrm{det} \left[ \begin{array}{ccc} -3 & 2 & 0 \\
+3 & -2 & 4 \\ 0 & 5 & 3 \\ \end{array} \right] \\
+& - 1 \cdot \textrm{det} \left[ \begin{array}{ccc} -3 & 4 & 0 \\
+3 & 1 & 4 \\ 0 & 2 & 3 \\ \end{array} \right] 
+-5 \cdot \textrm{det} \left[ \begin{array}{ccc} -3 & 4 & 2 \\
+3 & 1 & -2 \\ 0 & 2 & 5 \\ \end{array} \right]. \\
+\end{align}$$
+</p>
+
+<br>
+
+<div class="greenbox">
+Let $A , B \in M_n(\mathbb{R}).$ Then
+<ul class="greenul">
+<li>$\textrm{det} (AB) = \textrm{det}(A) \textrm{det}(B).$
+</li>
+<li>$\textrm{det} \left( A^{-1} \right) = 
+\displaystyle\frac{1}{\textrm{det} (A)}.$
+</li>
+</ul>
+</div>
+
+<p>Finally, the most important fact about determinants for us is 
+that a matrix is nonsingular if and only if its determinant is nonzero.
+We will add this to our list of statements equivalent to a matrix
+being nonsingular.</p>
+
+<div class="bluebox">
+<b>Theorem:</b> For $A \in M_n(\mathbb{R}),$ the following are
+equivalent:
+<ul class="blueul">
+<li>$A$ is invertible, i.e., there exists a matrix 
+$A^{-1} \in M_n(\mathbb{R})$ such that $A A^{-1} = A^{-1} A = I_n.$
+</li>
+<li>The matrix equation $A {\bf x} \, = \, {\bf b}$ has
+a unique solution for every ${\bf b} \in {\mathbb R}^n.$
+</li>
+<li>The matrix equation $A {\bf x} \, = \, {\bf 0}$ has
+only the trivial solution.
+</li>
+<li>The reduced row echelon form of $A$ is $I_n,$ i.e., 
+$\textrm{RREF}(A) = I_n.$
+</li>
+<li>The determinant of $A$ is nonzero: $\textrm{det}(A) \neq 0.$
+</li>
+</ul>
+</div>
+
+<br><br><br>
+
+</body>
+</html>

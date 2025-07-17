@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="LinAlg.css">
+<style>.equation { color: rgb(0, 51, 153); }</style>
+<style>
+ul {
+    list-style-position: outside;
+    list-style-image: url('bluedot.gif');
+}
+ul.inner {
+    list-style-position: outside;
+    list-style-image: none;
+    list-style-type: disc;
+}
+ul.inner2 {
+    list-style-position: outside;
+    list-style-image: none;
+    list-style-type: circle;
+}
+</style>
+<title>LA6 for DE</title>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage"});</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>
+</head>
+<body>
+
+<br>
+<h1>Subspaces</h1>
+<br>
+
+<div class="sectionhead">1. Basics of Subspaces</div>
+
+<p class="tabbed">A great way to understand vector spaces is to look 
+at subspaces. A 
+subspace of a vector space, $V,$ is a subset, $W \subseteq V,$ such 
+that $W$ is <em>also</em> a vector space with the same operations as 
+$V.$ There is a fast way to check that a subset is a subspace by 
+checking just three properties. Finally, once we have the idea of a 
+subspace, we can find a bounty of new vector space examples by looking 
+at subspaces of vector spaces we already know - namely, the vector 
+spaces listed in 
+<a href="LinAlg5.html" target="_blank">LinAlg5.html</a>.
+
+<br><br>
+
+<div class="bluebox">
+Let $V$ be a vector space and $W \subseteq V$ be a subset of $V.$
+Then $W$ is a <b>Subspace</b> of $V$ if it has the following three
+properties:
+<ul class="blueul">
+<li><b>Property Z (Zero Vector):</b> The zero vector in $V$ must be in $W$. For $\vec{0} \in V$, we have $\vec{0} \in W$.
+</li>
+<li><b>Property AC (Additive Closure):</b> If $u, v \in W$, then $u+v \in W$.
+</li>
+<li><b>Property SC (Scalar Closure):</b> If $\alpha \in \mathbb{R}$ and $u \in W$, then $\alpha \cdot u \in W$.
+</li>
+</ul>
+</div>
+
+<br>
+
+<div class="sectionhead" style="top: 0px;">2. Examples</div>
+
+<p class="tabbed">For some of the examples below, I am relying on the idea discussed in the lesson on vector spaces in the section Geometric Intuition, that a subspace of a vector space should have smaller dimension.</p>
+
+<ul class="blueul">
+<li>
+<b>Subspaces of $\mathbb{R}^n$</b>
+<br>
+<ul class="inner">
+<li>
+Since $\mathbb{R}^1$ is $1$ dimensional, it only has subspaces that are $1$ dimensional ("like" $\mathbb{R}^1$) or $0$ dimensional. Thus $\mathbb{R}^1$ only has two subspaces: the whole line, $\mathbb{R}^1,$ and the trivial subspace, $\left\{ \vec{0} \right\}.$
+</li>
+<li>
+Since $\mathbb{R}^2$ is $2$ dimensional, it only has subspaces that are $0,$ $1,$ or $2$ dimensional. It has only one $2$ dimensional subspace, $\mathbb{R}^2 \subseteq \mathbb{R}^2,$ and only one $0$ dimensional subspace, $\left\{ \vec{0} \right\} \subseteq \mathbb{R}^2.$ But $\mathbb{R}^2$ has infinitely many subspaces that are $1$ dimensional. Every line through the origin is isomorphic to $\mathbb{R}^1$ and is a subspace of $\mathbb{R}^2.$
+</li>
+<li>
+The subspaces of $\mathbb{R}^3$ are $\mathbb{R}^3,$ $\left\{ \vec{0} \right\},$ every line through the origin, and every plane through the origin.
+</li>
+<li>
+The most important example of a subspace of $\mathbb{R}^n$ for differential equations is the following.
+
+<br><br>
+
+<div class="bluebox">
+The <b>Kernel</b>, or <b>Null Space</b>, of a matrix 
+$A \in M_{m \times n}(\mathbb{R})$ is the set
+  $$\textrm{ker}(A) \ = \ \textrm{Nul}(A) \ = \ 
+  \left\{ \, {\bf x} \ \in \ {\mathbb R}^n \middle\vert \ A
+  {\bf x} \ = \ {\bf 0} \ \right\}$$
+  of all solutions ${\bf x}$ in ${\mathbb R}^n$
+  of the homogeneous equation $A {\bf x} \, = \, {\bf 0}.$
+  <p class="tabbed"><b>Note:</b> $\textrm{Nul}(A) \subseteq 
+  \mathbb{R}^n$ is always a subspace. In fact, every subspace of 
+  $\mathbb{R}^n$ is the null space of some matrix $A.$</p>
+</div>
+
+<br>
+Let's prove that $\textrm{Nul}(A) \subseteq \mathbb{R}^n$ is a subspace.
+	<ul class="inner2">
+	<li><em>Property Z</em>: For $\vec{0} \in \mathbb{R}^n,$ $A \vec{0} = \vec{0} \in \mathbb{R}^m,$ so $\vec{0} \in \textrm{Nul}(A).$</li>
+	<li><em>Property AC</em>: If $v_1, v_2 \in \textrm{Nul}(A),$ then $A v_1 = \vec{0}$ and $A v_2 = \vec{0}.$ So $A(v_1 + v_2) = Av_1 + Av_2 = \vec{0} + \vec{0} = \vec{0},$ thus $v_1 + v_2 \in \textrm{Nul}(A).$</li>
+	<li><em>Property SC</em>: Let $\alpha \in \mathbb{R}$ and $v \in \textrm{Nul}(A).$ Then $A v = \vec{0}$ so $A(\alpha \,  v) = \alpha \,  Av = \alpha \,  \vec{0}= \vec{0},$ thus $\alpha \,  v \in \textrm{Nul}(A).$</li>
+	</ul>
+In the note in definition of $\textrm{Nul}(A),$ it says that every subspace of $\mathbb{R}^n$ is the null space of some matrix $A$. Let's see some examples.
+	<ul class="inner2">
+	<li>Each 1 dimensional subspace of $\mathbb{R}^2$ is a line through the origin. The line with slope $m$ is the subspace $V = \left\{ [x,y] \in \mathbb{R}^2 \, \middle\vert \, y=mx \right\}$ which is the null space of $A = \left[ \begin{array}{cc} -m & 1 \end{array} \right].$ The line with infinite slope, the $y$-axis, is the null space of $A = \left[ \begin{array}{cc} 1 & 0 \end{array} \right].$
+	</li>
+	<li>A 1 dimensional subspace of $\mathbb{R}^3$ is the $x$-axis. This subspace is
+	$$V = \left\{ \ \left[ \begin{array}{c} x \\ 0 \\ 0 \\ \end{array} \right] \ \ \middle\vert \ \ x \in \mathbb{R} \right\} = \textrm{Nul} \left( \ \left[ \begin{array}{ccc} 0 & 1 & 0 \\ 0 & 0 & 1 \\ \end{array} \right] \ \right).$$
+	</li>
+	<li>A 2 dimensional subspace of $\mathbb{R}^3$ is the $xy$-plane. This subspace is
+	$$V = \left\{ \ \left[ \begin{array}{c} x \\ y \\ 0 \\ \end{array} \right] \ \ \middle\vert \ \ x , y \in \mathbb{R} \right\} = \textrm{Nul} \left( \ \left[ \begin{array}{ccc} 0 & 0 & 1 \\ \end{array} \right] \ \right).$$
+	</li>
+	</ul>
+</li>
+</ul>
+</li>
+<li>
+<b>Subspaces of $M_n(\mathbb{R})$</b>
+<br>
+<ul class="inner">
+<li>
+The space of <b>diagonal matrices</b>, $D_n,$ is the subspace of square matrices that have zeroes everywhere off the main diagonal. As a set they can be written as $$D_n = \left\{ \, A \in M_n(\mathbb{R}) \, \middle\vert \, \left[ A \right]_{\, i,\, j} = 0 \textrm{ for } i \neq j \, \right\} = 
+\left\{ \, \,
+\left[ \begin{array}{cccc} a_{\, 1, \, 1} & 0 & \cdots & 0 \\
+0 & a_{\, 2, \, 2} & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & a_{\, n, \, n} \\
+\end{array} \right] \, \,
+\middle\vert \, a_{\, i , \, i} \in \mathbb{R} \right\}.
+$$
+</li>
+<li>
+The space of <b>lower triangular matrices</b>, $LT_n,$ is the subspace of square matrices that have zeroes everywhere above the main diagonal. As a set they can be written as $$LT_n = \left\{ \, A \in M_n(\mathbb{R}) \, \middle\vert \, \left[ A \right]_{\, i,\, j} = 0 \textrm{ for } i < j \, \right\} = 
+\left\{ \, \,
+\left[ \begin{array}{cccc} a_{\, 1, \, 1} & 0 & \cdots & 0 \\
+a_{\, 2, \, 1} & a_{\, 2, \, 2} & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\
+a_{\, n, \, 1} & a_{\, n, \, 2} & \dots & a_{\, n, \, n} \\
+\end{array} \right] \, \,
+\middle\vert \, a_{\, i , \, j} \in \mathbb{R} \right\}.
+$$
+</li>
+<li>
+The space of <b>upper triangular matrices</b>, $UT_n,$ is the subspace of square matrices that have zeroes everywhere below the main diagonal. As a set they can be written as $$UT_n = \left\{ \, A \in M_n(\mathbb{R}) \, \middle\vert \, \left[ A \right]_{\, i,\, j} = 0 \textrm{ for } i > j \, \right\} = 
+\left\{ \, \,
+\left[ \begin{array}{cccc} a_{\, 1, \, 1} & a_{\, 1, \, 2} & \cdots & a_{\, 1, \, n} \\
+0 & a_{\, 2, \, 2} & \cdots & a_{\, 2, \, n} \\ \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & a_{\, n, \, n} \\
+\end{array} \right] \, \,
+\middle\vert \, a_{\, i , \, j} \in \mathbb{R} \right\}.
+$$
+</li>
+<li>
+Notice that $D_n$ is actually a subspace of $LT_n$ <em>and</em> $UT_n,$ as well as a subspace of $M_n(\mathbb{R}).$ In fact, $D_n = LT_n \cap UT_n.$ In general, the intersection of any two subspaces is also a subspace. Can you prove it?
+</li>
+</ul>
+</li>
+<li>
+<b>Subspaces of $C(\mathbb{R})$</b>
+<br>
+Remember our nested list of vector spaces? 
+
+<p>
+ <table style="margin-left: auto; margin-right: auto;
+  text-align: left;" border="2" bordercolor="darkgreen" cellspacing="0" cellpadding="0"
+  ">
+<tbody>
+<tr>
+<td style="text-align: left;  padding-right: 0.5cm;
+  vertical-align: top; padding-left: 0.5cm; color: darkgreen;
+  padding-top: 0.3cm;  padding-bottom: 0.3cm;  background: rgb(245,255,250);">
+$$\mathcal{P}_0 \subseteq \mathcal{P}_1 \subseteq \mathcal{P}_2 \subseteq \cdots \subseteq \mathcal{P}_n \subseteq \cdots \subseteq \mathcal{P} \subseteq C^{\, \infty}(\mathbb{R}) \subseteq \cdots $$
+$$\cdots \subseteq C^{\, k}(\mathbb{R}) \subseteq \cdots \subseteq C^{\, 2}(\mathbb{R}) \subseteq C^{\, 1}(\mathbb{R}) \subseteq C^{\, 0}(\mathbb{R}) = C(\mathbb{R})$$
+</td>
+</tr>
+</tbody>
+</table></p>
+
+Now we see that each subset is actually a subspace of any other vector space in the list in which it is contained. For example, $\mathcal{P}_3 \subseteq C^{\, 17}(\mathbb{R})$ is a subspace.
+</li>
+<li>
+<b>Subspaces from differential equations</b>
+<br>
+<ul class="inner">
+<li>
+If $L$ represents an $n$th order, homogeneous O.D.E., then $V_L \subseteq C(\mathbb{R})$ is a subspace. If $A \in M_n(\mathbb{R}),$ then $V_A \subseteq C^{\, \infty}(\mathbb{R},\mathbb{R}^n)$ is a subspace.
+</li>
+<li>
+If $L[\,y\,] = y^{(n)} = 0$, then $V_L = \mathcal{P}_{n-1}$. For example, two fundamental solutions to $L[\,y\,] = y^{\, \prime \prime} = 0$ are $y_1(t) = 1$ and $y_2(t) = t$. Thus $V_L = \left\{ c_1 \cdot 1 + c_2 \cdot t \, \middle\vert \, c_1, c_2 \in \mathbb{R} \right\} = \mathcal{P}_1$.
+</li>
+<li>
+Consider the following three subsets of $C^{\, 1}(\mathbb{R})$:
+	<ul class="inner2">
+	<li>$W_1 = \left\{ \, f \, \middle\vert \, f^{\, \prime}(1) = 0 \, \right\}$</li>
+	<li>$W_2 = \left\{ \, f \, \middle\vert \, f^{\, \prime}(1) = 1 \, \right\}$</li>
+	<li>$W_3 = \left\{ \, f \, \middle\vert \, f^{\, \prime}(t) = f(t) \, \right\}$</li>
+	</ul>
+As similar as they make look in description, they are all quite different. The subset $W_2$ is <em>not</em> a subspace. One can see immediately that it fails Property Z. It is a good exercise to show that it fails Property AC and Property SC as well. Both $W_1$ and $W_2$ <em>are</em> subspaces, so they are similar in that respect. Again, it is a very good exercise to prove this. They have different dimensions, though. In fact, 
+$$W_3 = V_{\left\{y^{\,\prime}-y\,=\,0 \right\}} = \left\{ c \cdot e^t \, \middle\vert \, c \in \mathbb{R} \right\}$$
+so it is 1 dimensional, $W_3 \cong \mathbb{R}^1.$ However, $W_1$ is infinite dimensional.
+</li>
+<li>Returning to $A \in M_n(\mathbb{R}),$ we have $\textrm{Nul}(A) \subseteq V_A.$ For example, 
+$$\textrm{if } \ A = \left[ \begin{array}{cc} 1 & 0 \\ 0 & 0 \\ \end{array} \right], \textrm{ then } \textrm{Nul}(A) = \left\{ \ \left[ \begin{array}{c} 0 \\ c \\ \end{array} \right] \ \ \middle\vert \ \ c \in \mathbb{R} \right\}$$
+and
+$$V_A = \left\{ \ 
+c_1 \left[ \begin{array}{c} e^t \\ 0 \\ \end{array} \right] +
+c_2 \left[ \begin{array}{c} 0 \\ 1 \\ \end{array} \right]
+\ \ \middle\vert \ \ c_1 , c_2 \in \mathbb{R} \right\}, \textrm{ thus } \textrm{Nul}(A) \subseteq V_A.$$
+</li>
+</ul>
+</li>
+</ul>
+
+<br><br><br><br><br><br><br><br>
+</body>
+</html>

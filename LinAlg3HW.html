@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="LinAlg.css">
+<title>LA3HW for DE</title>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage"});</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script> 
+</head>
+<body>
+
+<br>
+<h1>Homework for Matrix Inverses</h1>
+<br>
+
+<h4>1. Inverses</h4>
+
+Know how to
+<ul class="inner">
+<li>Determine if a square matrix is singular or nonsingular.</li>
+<li>Compute the inverse of a nonsingular matrix.</li>
+<li>Use the inverse of a nonsingular matrix $A$ to solve 
+$A {\bf x} \,=\, {\bf b}.$</li>
+</ul>
+
+<ul class="blueul">
+<li>
+Examples: 
+	<ul class="inner">
+		<li>From <a href="
+		http://linear.ups.edu/html/section-MISLE.html
+		" target="_blank">
+		http://linear.ups.edu/html/section-MISLE.html</a>, 
+		read Example MI, Example CMI, and Example CMIAB.
+		</li>
+	</ul>
+</li>
+<li>
+Homework: 
+	<ul class="inner">
+		<li>From <a href="
+		http://linear.ups.edu/html/section-MISLE.html
+		" target="_blank">
+		http://linear.ups.edu/html/section-MISLE.html</a>, 
+		do Exercises MISLE.C16, MISLE.C17, MISLE.C18, MISLE.C19, MISLE.C21, MISLE.C22 
+		(Note: $\mathcal{LS}(A,{\bf c})$ means the matrix equation $A {\bf x} \,=\, {\bf c}$),
+		MISLE.C23, MISLE.C24, MISLE.C25, MISLE.C26, MISLE.C27, MISLE.C28, 
+		MISLE.C40, MISLE.C41, and MISLE.C42.
+		</li>
+		<li>From <a href="
+		http://linear.ups.edu/html/section-MINM.html
+		" target="_blank">
+		http://linear.ups.edu/html/section-MINM.html</a>, 
+		do Exercises MINM.C20, and MINM.C40.
+		</li>
+	</ul>
+</li>
+<li>
+Use the following example and create your own problems:
+</li>
+</ul>
+<b><span style="color: red;">Note:</span> 
+You can use the code below to find the inverse of any matrix you see this semester!</b>
+<div class="sage"><script type="text/x-sage">
+A = matrix(QQ, [[-7, -6, -12],[5,   5,   7],[1,   0,   4]])
+Ainv=A.inverse()
+show(A)
+show(Ainv)
+show(A*Ainv)
+show(Ainv*A)
+</script></div>
+
+<br>
+<br>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="LinAlg.css">
+<title>LA1HW for DE</title>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage"});</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script> 
+</head>
+<body>
+
+<br>
+<h1>Homework for Vectors and Matrices</h1>
+<br>
+
+<h4>1. Arithmetic with complex numbers</h4>
+Know how to add, subtract, multiply, and divide complex numbers.
+<ul class="blueul">
+<li>
+Examples: From <a href="http://linear.ups.edu/html/section-CNO.html" target="_blank">
+http://linear.ups.edu/html/section-CNO.html</a>, read Example ACN and Example CSCN.
+</li>
+<li>
+Use the following example and create your own problems:
+</li>
+</ul>
+<div class="sage"><script type="text/x-sage">
+z1=4+3*I
+z2=1+2*I
+show(z1)
+show(z2)
+show(z1/z2)
+show(z2.conjugate())
+</script></div>
+
+<h4>2. Dot Product</h4>
+Know how to compute the dot product of two vectors.
+<ul class="blueul">
+<li>
+Examples: From <a href="http://linear.ups.edu/html/section-VO.html" target="_blank">
+http://linear.ups.edu/html/section-VO.html</a>, read Example VA, Example CVSM, and Sage VO.
+</li>
+<li>
+Homework: From <a href="http://linear.ups.edu/html/section-VO.html" target="_blank">
+http://linear.ups.edu/html/section-VO.html</a>, do Exercises VO.C10, VO.C11, VO.C12,
+VO.C13, and VO.C14.
+</li>
+<li>
+Use the following example and create your own problems:
+</li>
+</ul>
+<div class="sage"><script type="text/x-sage">
+v=vector(QQ, [5,2,3])
+show(v)
+w=vector(QQ, [-1,1,0])
+show(w)
+show(v*w)
+show(v*v)
+</script></div>
+
+<h4>3. Matrix operations</h4>
+Know how to scale, add, subtract, and multiply matrices.
+<ul class="blueul">
+<li>
+Examples: From <a href="http://linear.ups.edu/html/section-MO.html" target="_blank">
+http://linear.ups.edu/html/section-MO.html</a>, read Example MA, Example MSM, and Sage MS.
+</li>
+<li>
+Homework: From <a href="http://linear.ups.edu/html/section-MO.html" target="_blank">
+http://linear.ups.edu/html/section-MO.html</a>, do Exercises MO.C10 Parts 1, 2, 5, and 6, 
+MO.C11, MO.C12, and MO.C13.
+</li>
+<li>
+Use the following example and create your own problems:
+</li>
+</ul>
+<div class="sage"><script type="text/x-sage">
+A=matrix(QQ, [[2,1],[4,2]])
+v1=matrix(QQ, [[2],[3]])
+v2=matrix(QQ, [[1],[3]])
+show(A*v1-5*v2)
+</script></div>
+
+<br>
+<br>
+
+</body>
+</html>
